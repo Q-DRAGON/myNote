@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>轮播图</title>
+    <style>
+        /*下拉菜单*/
+        .gua-hide{
+            display: none;
+        }
+        .gua-menu-content{
+            height: 100px;
+            border: 1px solid red;
+        }
+        /*图片高亮*/
+        .gua-item{
+            filter: grayscale(1);
+            display: inline-block;
+        }
+        .gua-item.gua-highlight{
+            filter: initial;
+        }
+        .gua-item.gua-highlight img{
+            width: 150px;
+            height: 150px;
+        }
+        img{
+            transition: width 1s, height 1s;
+        }
+        .gua-item img{
+            width: 100px;
+            height: 100px;
+        }
+        /* 3， 轮播图*/
+            .gua-slide {
+                position: relative;
+            }
+            .gua-slide img{
+                position: relative;
+                width: 200px;
+                height: 200px;
+            }
+            .gua-slide-image {
+                display: none;
+            }
+            /*.gua-slide-image*/
+            .gua-active {
+                display: inline-block;;
+            }
+            .gua-slide-button{
+                color: white;
+                background-color: rgba(0,0,0,0);
+                border: none;
+                width: 10px;
+            }
+            .right {
+                left: 180px;
+            }
+            .left{
+                left: -8px;
+            }
+            .gua-vertical-center {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            .gua-slide-indicators {
+                position: absolute;
+                bottom: 10px;
+                left: 90px;
+            }
+            .gua-slide-indi {
+                display: inline-block;
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background: red;
+            }
+            .gua-white {
+                background: white;
+            }
+    </style>
+</head>
+<body>
+    <div class="gua-1">
+        <div class="gua-menu">
+            <button class="gua-menu-toggle">点击展开详情</button>
+            <div class="gua-menu-content gua-hide">
+                详情
+            </div>
+        </div>
+        <div class="gua-menu">
+            <button class="gua-menu-toggle">点击展开详情</button>
+            <div class="gua-menu-content gua-hide">
+                详情
+            </div>
+        </div>
+    </div>
+
+    <div class="gua-2">
+        <div class="gua-list">
+            <div class="gua-item">
+                <img src="slideimages/1.jpg">
+            </div>
+            <div class="gua-item">
+                <img src="slideimages/2.jpg">
+            </div>
+            <div class="gua-item">
+                <img src="slideimages/3.jpg">
+            </div>
+        </div>
+    </div>
+
+    <div class="gua-3">
+        <!-- data-imgs 是图片的总数 -->
+        <!-- data-active 是当前显示的图片的下标 -->
+        <div class="gua-slide" data-imgs=3 data-active=0>
+            <img id=id-guaimage-0 class="gua-slide-image gua-active" src="slideimages/1.jpg" alt="">
+            <img id=id-guaimage-1 class=gua-slide-image src="slideimages/2.jpg" alt="">
+            <img id=id-guaimage-2 class=gua-slide-image src="slideimages/3.jpg" alt="">
+            <button class="gua-slide-button right gua-vertical-center">>></button>
+            <button class="gua-slide-button left gua-vertical-center"><<</button>
+            <div class="gua-slide-indicators">
+                <div class="gua-slide-indi gua-white"></div>
+                <div class="gua-slide-indi"></div>
+                <div class="gua-slide-indi"></div>
+            </div>
+        </div>
+    </div>
+    <script src="gua.js" type="text/javascript"></script>
+    <script src="上课.js" type="application/javascript"></script>
+</body>
+</html>

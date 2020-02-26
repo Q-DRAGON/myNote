@@ -1,0 +1,46 @@
+-- begin,end用来限定存储过程体
+CREATE PROCEDURE productpricing()
+BEGIN
+  SELECT avg(prod_price) as priceAverage
+  FROM products
+END;
+
+CALL productpricing()
+DROP PROCEDURE productpricing
+
+
+CREATE PROCEDURE productpricing(out pl DECIMAL(8, 2),
+  out ph DECIMAL(8, 2))
+  BEGIN
+    SELECT min(prod_price)
+    INTO pl
+    FROM products;
+    SELECT max(prod_price)
+    INTO ph
+    FROM products;
+  END;
+
+call productpricing(@pricelow, @pricehigh)
+select @pricelow
+
+
+CREATE PROCEDURE ordertotal(IN onumber int,
+  out ototal DECIMAL(8,2))
+  BEGIN
+    SELECT sum(item_price*quantity)
+    FROM orderitems
+    WHERE order_num = onumber
+    into ototal
+  END;
+
+call ordertotal(20005, @total)
+SELECT  @total
+
+show create PROCEDURE ordertotal
+
+CREATE proc C1
+@fno char(20), @fdname char(2)
+as insert into factory
+values(@fno, @fdname)
+
+exec C1 'aa', 'tom'

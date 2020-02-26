@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>三栏布局</title>
+        <style>
+            /*
+            三栏布局的方案一般左右两栏固定宽度, 中间自适应, 以前有两个流行的解决方案
+            一个是「圣杯布局」, 另一个是「双飞翼布局」
+            两者的差异可以在网上看, 下面是相应的代码
+            */
+            .case {
+                padding: 10px;
+                margin: 20px;
+                border: 1px solid #eee;
+            }
+
+            .clearfix::after {
+                content: " ";
+                display: block;
+                clear: both;
+            }
+
+            .holy-grails {
+                width: 800px;
+                margin: 0 auto;
+                border: 1px solid #000;
+            }
+
+            .holy-grails .header,
+            .holy-grails .footer {
+                height: 40px;
+                background: lightyellow;
+            }
+
+            .holy-grails .section {
+                /* 200 和 150 分别是 left 和 right 的宽度 */
+                padding-left: 200px;
+                padding-right: 150px;
+            }
+
+            .holy-grails .column {
+                position: relative;
+                float: left;
+                height: 200px;
+            }
+
+            .holy-grails .main {
+                width: 100%;
+                background: lightblue;
+            }
+
+            .holy-grails .left {
+                width: 200px;
+                margin-left: -100%;
+                left: -200px;
+                background: lightpink;
+            }
+
+            .holy-grails .right {
+                width: 150px;
+                margin-right: -150px;
+                background: lightgray;
+            }
+
+            /* 双飞翼布局 */
+            .tb {
+                width: 800px;
+                margin: 0 auto;
+                border: 1px solid #000;
+            }
+
+            .tb .header,
+            .tb .footer {
+                height: 40px;
+                background: lightyellow;
+            }
+
+            .tb .section {
+                /* 200 和 150 分别是 left 和 right 的宽度 */
+                /* padding-left: 200px;
+                padding-right: 150px; */
+            }
+
+            .tb .column {
+                float: left;
+                height: 200px;
+            }
+
+            .tb .main {
+                width: 100%;
+                background: lightblue;
+            }
+
+            .tb .main-inner {
+                /* 150 和 200 分别是右边和左边的大小 */
+                margin: 0 150px 0 200px;
+                height: 200px;
+            }
+
+            .tb .left {
+                width: 200px;
+                margin-left: -100%;
+                background: lightpink;
+            }
+
+            .tb .right {
+                width: 150px;
+                margin-left: -150px;
+                background: lightgray;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="case">
+            <h3>圣杯布局</h3>
+            <div class="container holy-grails">
+                <div class="header">
+                    header
+                </div>
+                <div class="section clearfix">
+                    <!-- 本来应该按照 left main right 的顺序写 HTML, 但是想让主体部分 main 更快加载, 所以把 main 写在最前面 -->
+                    <div class="main column">
+                        main
+                    </div>
+                    <div class="left column">
+                        left
+                    </div>
+                    <div class="right column">
+                        right
+                    </div>
+                </div>
+                <div class="footer">
+                    footer
+                </div>
+            </div>
+        </div>
+
+        <div class="case">
+            <h3>双飞翼布局</h3>
+            <div class="container tb">
+                <div class="header">
+                    header
+                </div>
+                <div class="section clearfix">
+                    <div class="main column">
+                        <div class="main-inner">
+                            main
+                        </div>
+                    </div>
+                    <div class="left column">
+                        left
+                    </div>
+                    <div class="right column">
+                        right
+                    </div>
+                </div>
+                <div class="footer">
+                    footer
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

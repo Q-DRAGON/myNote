@@ -1,0 +1,28 @@
+单页面应用的优缺点：
+// SPA(Single Page Application) 说的是当页面的内容变化的时候, 还处于当前页面
+// 这样的话加载内容更少, 速度更快, 体验更好
+// 有记住页面状态的能力
+
+// 不利于搜索引擎搜索
+
+单页面应用原理：
+后端启动服务器程序，提供一个单一页面。
+在 HTML5 之前, 一般会采用 hash 来实现路由, hash 发生变化的时候页面并不会刷新
+单一页面根据location解析，然后根据解析的url进行path响应。响应的同时preventDefault()
+阻止默认窗口弹出。然后history存储该状态。
+
+
+// 注意, 调用 history.pushState 并不会触发 popstate 事件
+// 当使用浏览器的前进、后退功能时会触发这个事件, 包括点击 后退按钮和调用 history.go(-1), history.back() 语句
+window.addEventListener('popstate', (event) => {
+    // event.state 的值是 history.pushState 调用时传入的第一个参数
+    log('pop state', event.state)
+})
+
+
+// pushState 一共三个参数, 第一个参数 state 是一个对象, 可以用来存储数据, 但是大小有限制,
+// 所以不如localStorage 方便
+// 第二个参数 title 忽略就好了, 直接设置为空字符串 ''
+// 第三个参数 path 是想要跳转的路径, 也可以设置 query 部分
+history.pushState(state, '', path)
+

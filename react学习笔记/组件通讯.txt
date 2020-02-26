@@ -1,0 +1,81 @@
+组件通讯：
+子组件获取父组件数据：父组件像子组件通讯
+this.props.todos
+
+父组件获取子组件数据：子组件像父组件通讯
+通过将自己的函数方法传给自己的子组件，子组件通过props获取这个方法
+然后调用即可
+this.onupdate = function(){} (todo)
+onupdate=this.onupdate (todo)
+onupdate=this.props.onupdate (todolist)
+this.props.onupdate (todoitem)
+
+跨级组件通讯：
+两种方式：
+中间组件层层传递 props
+
+使用 context 对象
+context 相当于一个全局变量，是一个大容器，
+我们可以把要通信的内容放在这个容器中，这样一来，不管嵌套有多深，
+都可以随意取用。
+使用 context 也很简单，需要满足两个条件：
+上级组件要声明自己支持 context，并提供一个函数来返回相应的
+context 对象
+子组件要声明自己需要使用 context
+
+app.js
+export default class App extends Component{
+    // 父组件声明自己支持 context
+    static childContextTypes = {
+        color:PropTypes.string,
+        callback:PropTypes.func,
+    }
+
+    // 父组件提供一个函数，用来返回相应的 context 对象
+    getChildContext(){
+        return{
+            color:"red",
+            callback:this.callback.bind(this)
+        }
+    }
+
+    callback(msg){
+        console.log(msg)
+    }
+
+    render(){
+        return(
+            <div>
+                <Sub></Sub>
+            </div>
+        );
+    }
+}
+
+subsub.js
+
+import React,{ Component } from "react";
+import PropTypes from "prop-types";
+
+export default class SubSub extends Component{
+    // 子组件声明自己需要使用 context
+    static contextTypes = {
+        color:PropTypes.string,
+        callback:PropTypes.func,
+    }
+    render(){
+        const style = { color:this.context.color }
+        const cb = (msg) => {
+            return () => {
+                this.context.callback(msg);
+            }
+        }
+        return(
+            <div style = { style }>
+                SUBSUB
+                <button onClick = { cb("我胡汉三又回来了！") }>点击我</button>
+            </div>
+        );
+    }
+}
+

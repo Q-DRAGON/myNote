@@ -1,0 +1,10 @@
+安装代码托管服务
+gogs 是一个类似github的代码托管服务
+它简单方便易于使用，我们使用它进行源代码管理
+
+将本目录下的docker-compose.yml 上传到服务器的 /root/gogs/docker-compose.yml
+
+在服务器的 /root/gogs 中启动服务
+docker-compose up -d
+
+访问服务器的 3000 端口并初始化服务

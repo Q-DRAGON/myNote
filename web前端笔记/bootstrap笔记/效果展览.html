@@ -1,0 +1,347 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0
+        maximum-scale=1.0, user-scalable=no">
+    <title>bootstrap</title>
+    <link rel="stylesheet" href="./bootstrap.css" media="screen">
+    <script src="./jquery.js"></script>
+    <script src="./bootstrap.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <span class="navbar-brand">Brand</span>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Link</a></li>
+            <li><a href="#">Link</a></li>
+            <form class="navbar-form navbar-left">
+                <div class="row">
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><input type="radio"></span>
+                            <input type="text" placeholder="input something" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                        <button type="button" class="btn btn-md btn-default">button</button>
+                    </div>
+                </div>
+            </form>
+        </ul>
+    </div>
+</nav>
+
+<hr>
+<p>
+<hr>
+</p>
+
+<ul class="nav nav-pills">
+    <li class="active"><a href="#">Home</a></li>
+    <li><a href="#">Profile</a></li>
+    <li><a href="#">Messages</a></li>
+</ul>
+<hr>
+
+<ol class="breadcrumb">
+  <li><a href="#">Home</a></li>
+  <li><a href="#">Library</a></li>
+  <li class="active">Data</li>
+</ol>
+
+<span class="label label-default">Default</span>
+<span class="label label-primary">Primary</span>
+<span class="label label-success">Success</span>
+<span class="label label-info">Info</span>
+<span class="label label-warning">Warning</span>
+<span class="label label-danger">Danger</span>
+<hr>
+
+<div class="jumbotron">
+    <h1 class="page-header">Hello, world!</h1>
+    <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or
+        information.</p>
+    <div class="row">
+        <div class="col-sm-4 col-md-4 col-xs-4">
+            <div class="thumbnail">
+                <img src="http://placehold.it/300x200/78EB09/FFEB09/&text=Hello World" alt="...">
+                <div class="caption">
+                    <h3>Thumbnail label</h3>
+                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida
+                        at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default"
+                                                                                       role="button">Button</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 col-md-4 col-xs-4">
+            <div class="thumbnail">
+                <img src="http://placehold.it/300x200/78EB09/FFEB09/&text=Hello World" alt="...">
+                <div class="caption">
+                    <h3>Thumbnail label</h3>
+                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida
+                        at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default"
+                                                                                       role="button">Button</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 col-md-4 col-xs-4">
+            <div class="thumbnail">
+                <img src="http://placehold.it/300x200/78EB09/FFEB09/&text=Hello World" alt="...">
+                <div class="caption">
+                    <h3>Thumbnail label</h3>
+                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida
+                        at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default"
+                                                                                       role="button">Button</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p>
+</div>
+
+
+<ol class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Library</a></li>
+    <li class="active">Data</li>
+</ol>
+<hr>
+
+<div class="dropdown">
+    <button class="btn dropdown-toggle btn-default"
+            data-toggle="dropdown" type="button">
+        comment
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu text-center">
+        <li class="dropdown-header">dropdown header1</li>
+        <li><a href="#">Action1</a></li>
+        <li><a href="#">Action2</a></li>
+        <li><a href="#">Action3</a></li>
+        <li class="divider"></li>
+        <li class="dropdown-header">dropdown header2</li>
+        <li><a href="#">active</a></li>
+    </ul>
+</div>
+
+<hr>
+
+<div class="btn-group btn-group-vertical btn-group-lg">
+    <button type="button" class="btn btn-success">python1</button>
+    <button type="button" class="btn btn-success">python2</button>
+    <!--?<span class="dropdown">-->
+    <button class="btn btn-success"
+            data-toggle="dropdown" id="dropdownMenu" type="button">
+        python3
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu text-center"
+        aria-labelledby="dropdownMenu">
+        <li class="dropdown-header">dropdown header1</li>
+        <li><a href="#">Action1</a></li>
+        <li><a href="#">Action2</a></li>
+        <li><a href="#">Action3</a></li>
+        <li class="divider"></li>
+        <li class="dropdown-header">dropdown header2</li>
+        <li><a href="#">active</a></li>
+    </ul>
+    <!--?</span>-->
+    <button type="button" class="btn btn-success">python4</button>
+    <button type="button" class="btn btn-success">python5</button>
+    <button type="button" class="btn btn-success">python6</button>
+    <button type="button" class="btn btn-success">python7</button>
+    <button type="button" class="btn btn-success">python8</button>
+    <button type="button" class="btn btn-success">python9</button>
+    <button type="button" class="btn btn-success">python10</button>
+</div>
+
+<hr>
+<h1 class="page-header">输入框组</h1>
+<form action="#" role="form">
+    <!--?<div class="form-control">-->
+    <label for="input-address">address:</label>
+    <div class="input-group" id="input-address">
+        <span class="input-group-addon">@</span>
+        <input type="text" class="form-control" placeholder="address">
+    </div>
+    <!--?</div>-->
+</form>
+
+<!--?<span class="badge"><a href="#">42</a></span>-->
+
+<hr>
+<div class="progress progress-striped active">
+    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0"
+         aria-valuemax="100" style="width: 40%">
+        <span class="sr-only">40% Complete (success)</span>
+    </div>
+</div>
+<div class="progress progress-striped active">
+    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0"
+         aria-valuemax="100" style="width: 20%">
+        <span class="sr-only">20% Complete</span>
+    </div>
+</div>
+<div class="progress progress-striped active">
+    <div class="progress-bar progress-bar-danger"
+         role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
+         style="width: 70%">
+    </div>
+    <div class="progress-bar progress-bar-warning"
+         role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"
+         style="width: 20%">
+    </div>
+</div>
+
+<hr>
+
+<ul class="media-list">
+    <li class="media">
+        <a class="pull-left" href="#">
+            <img class="media-object" src="http://placehold.it/64x64" alt="...">
+        </a>
+        <div class="media-body">
+            <h4 class="media-heading">Media heading</h4>
+            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras
+                purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate
+                fringilla. Donec lacinia congue felis in faucibus.</p>
+        </div>
+    </li>
+
+    <li class="media">
+        <a class="pull-left" href="#">
+            <img class="media-object" src="http://placehold.it/64x64" alt="...">
+        </a>
+        <div class="media-body">
+            <h4 class="media-heading">Media heading</h4>
+            <div id="alert1" class="alert alert-warning fade in">
+                <button id='alert1' type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>Holy guacamole!</strong> Best check yo self, you're not looking too good.
+            </div>
+            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras
+                purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate
+                fringilla. Donec lacinia congue felis in faucibus.</p>
+        </div>
+    </li>
+</ul>
+<hr>
+
+<ul class="list-group">
+    <li class="list-group-item"><span class="badge">14</span>Cras justo odio</li>
+    <li class="list-group-item"><span class="badge">33</span>Dapibus ac facilisis in</li>
+    <li class="list-group-item"><span class="badge">11</span>Morbi leo risus</li>
+    <li class="list-group-item"><span class="badge">41</span>Porta ac consectetur ac</li>
+    <li class="list-group-item"><span class="badge">21</span>Vestibulum at eros</li>
+</ul>
+
+<hr>
+
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+    Launch demo modal
+</button>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                One fine body&hellip;
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" style="text-align:center">
+        <div class="item active">
+            <img alt="First slide" src="http://placehold.it/900x500/78EB09/FFEB09/&text=First slide"></img>
+        </div>
+        <div class="item">
+            <img alt="Second slide" src="http://placehold.it/900x500/78EB09/FFEB09/&text=Second slide"></img>
+        </div>
+        <div class="item">
+            <img alt="Third slide" src="http://placehold.it/900x500/78EB09/FFEB09/&text=Third slide"></img>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+</div>
+
+<hr>
+<div class="btn-toolbar">
+    <div class="btn-group">
+        <button class="btn btn-default" type="button">1</button>
+        <button class="btn btn-default" type="button">2</button>
+        <button class="btn btn-default" type="button">3</button>
+    </div>
+
+    <div class="btn-group">
+        <button class="btn btn-default" type="button">4</button>
+        <button class="btn btn-default" type="button">5</button>
+    </div>
+
+    <div class="btn-group">
+        <button class="btn btn-default" type="button">6</button>
+    </div>
+</div>
+
+
+
+<ul class="pagination">
+    <li><a href="#">&laquo;</a></li>
+    <li><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li><a href="#">&raquo;</a></li>
+</ul>
+
+<ul class="pager">
+    <li><a href="#">Previous</a></li>
+    <li><a href="#">Next</a></li>
+</ul>
+
+<ul class="pager">
+    <li class="previous"><a href="#">&larr; Older</a></li>
+    <li class="next"><a href="#">Newer &rarr;</a></li>
+</ul>
+
+</body>
+</html>

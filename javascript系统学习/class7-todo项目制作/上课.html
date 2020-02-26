@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>上课用品</title>
+    <!--<script type="application/javascript" src="上课.js"></script>-->
+    <style>
+        .done {
+            color: grey;
+            background-color: lightblue;
+            text-decoration: line-through;
+        }
+
+        .todo-form {
+            width: 60%;
+            height: 30px;
+            border: #ada3a3 solid 1px;
+            border-radius: 5px;
+            background-color: #731212;
+            display: flex;
+        }
+
+        input#id-input-todo {
+            display: block;
+            width: 30%;
+            flex-grow: 3;
+            margin: 5px 10px;
+            border-radius: 5px;
+            flex: auto;
+            background: lightgoldenrodyellow;
+        }
+
+        button#id-button-add {
+            border-radius: 5px;
+            background: lightgoldenrodyellow;
+            display: block;
+            width: 8%;
+            flex-grow: 1;
+            border-color: transparent;
+            cursor: pointer;
+            padding: 0;
+            margin: 5px;
+        }
+
+        div#id-div-container {
+            margin-top: 10px;
+            width: 60%;
+        }
+
+        span.content {
+            width: auto;
+            text-align: center;
+            display: block;
+            float: left;
+            border-radius: 5px;
+            padding: 0;
+            /*position: relative;*/
+            overflow-wrap: break-word;
+            /*overflow-y: scroll;*/
+            /*overflow-x: hidden;*/
+            max-width: 80%;
+
+        }
+
+        button.todo-done, .todo-delete {
+            /*float: right;*/
+            /*position: absolute;*/
+            /*width: 10%;*/
+            border-radius: 5px;
+            background: gray;
+            border: none;
+            text-decoration: underline;
+            margin-left: 2px;
+            flex: auto;
+        }
+        /*button.todo-done{*/
+            /*margin-left: 65px;*/
+        /*}*/
+        /*button.todo-delete{*/
+            /*margin-left: 20px;*/
+        /*}*/
+    </style>
+</head>
+<body>
+<div class="todo-form">
+    <input id="id-input-todo" type="text">
+    <button id="id-button-add" type="button">Add</button>
+</div>
+
+<div id="id-div-container">
+
+</div>
+<script src="上课2.js" type="application/javascript"></script>
+<script>
+//var log = function(){
+//    console.log.apply(console, arguments)
+//}
+//
+//var currentTime = function(){
+//    var time = new Date()
+//    var day = time.getDate()
+//    var month = time.getMonth() + 1
+//    var year = time.getFullYear()
+//    var hour = time.getHours()
+//    var min = time.getMinutes()
+//    var sec = time.getSeconds()
+//    return `${year}/${month}/${day} ${hour}:${min}:${sec}`
+//}
+//
+//var save = function(array){
+//    var s =  JSON.stringify(array)
+//    localStorage.todos = s
+//}
+//
+//var load = function(){
+//    var s = localStorage.todos
+//    return JSON.parse(s)
+//}
+//
+//var saveAllTodos = function(){
+//    var todos = []
+//    var todosContent = document.querySelectorAll('.content')
+//    for(var i = 0; i < todosContent.length; i++){
+//        var c = todosContent[i];
+//        var done = c.parentElement.classList.contains("done")
+//        var time = c.querySelector('todo-time')
+//        var todo = {
+//            content: c.innerHTML,
+//            //bool done
+//            done: done,
+//            time: time
+//        }
+//        todos.push(todo)
+//    }
+//    save(todos)
+//}
+//
+//var todoTemplate = function(todo, done, time){
+//    var status = ''
+//    if(done){
+//        status = 'done'
+//    }
+//    r = `
+//        <div class="todo-cell ${status}">
+//        <button class="todo-done">完成</button>
+//        <button class="todo-delete">删除</button>
+//        <span contenteditable="true" class="content">${todo}</span>
+//        <span class="todo-time">${time}</span>
+//        </div>
+//    `
+//    return r
+//}
+//
+//
+//var addTodo = function(t){
+//    var todoContainer = document.querySelector('#id-div-container')
+//    todoContainer.insertAdjacentHTML('beforeend', t)
+//}
+//
+//var addButton = document.querySelector("#id-button-add")
+//
+//addButton.addEventListener('click', function() {
+//    var todoInput = document.querySelector("#id-input-todo")
+//    var todo = todoInput.value
+//    var time = currentTime()
+//    t = todoTemplate(todo, false, time)
+//    addTodo(t)
+//    saveAllTodos()
+//})
+//
+//var todoContainer = document.querySelector('#id-div-container')
+//todoContainer.addEventListener('click', function(event){
+//    target = event.target
+//    if(target.classList.contains('todo-done')){
+//        var todoDiv = target.parentElement
+//        toggleClass(todoDiv, 'done')
+//        saveAllTodos()
+//    }else if(target.classList.contains('todo-delete')){
+//        var todoDiv = target.parentElement
+//        todoDiv.remove()
+//        saveAllTodos()
+//    }
+//})
+//
+//var toggleClass = function(element, className){
+//    if(element.classList.contains(className)){
+//        element.classList.remove(className)
+//    }else{
+//        element.classList.add(className)
+//    }
+//}
+//
+//var loadAllTodos = function(){
+//    todos = load()
+//    for(var i = 0; i < todos.length; i++){
+//        content = todos[i].content
+//        done = todos[i].done
+//        t = todoTemplate(content, done)
+//        addTodo(t)
+//    }
+//}
+
+//loadAllTodos()
+</script>
+</body>
+</html>

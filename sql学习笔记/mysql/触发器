@@ -1,0 +1,15 @@
+-- 触发器名字
+-- 触发器关联的表
+-- 触发器应该响应的活动
+-- 触发器何时执行
+
+CREATE trigger newproduct
+after insert on products
+for each row select 'product added'
+
+
+DROP trigger newproduct
+
+CREATE trigger updatevendor
+before update on vendors
+for each row set new.vend_state = Upper(new.vend_state)

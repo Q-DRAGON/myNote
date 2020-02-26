@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>fe6 css</title>
+    <link rel="stylesheet" href="fe6.css">
+    <style>
+        body {
+            padding-bottom: 100px;
+        }
+        /*
+        选择器 {
+            属性: 值;
+        }
+        */
+        h1 {
+            background: lime !important;
+            text-align: center;
+        }
+
+        h2 {
+            background: yellow;
+        }
+
+        .gua-pink {
+            background: pink;
+            color: black;
+        }
+
+        #id-h4-hello {
+            background: red;
+        }
+
+        h3 {
+            background: lightgray;
+        }
+
+        .gua-box {
+            width: 100px;
+            height: 100px;
+            background: lightgreen;
+        }
+
+        .gua-left {
+            float: left;
+        }
+
+        .gua-right {
+            float: left;
+            background: lightcyan;
+        }
+
+        .gua-container {
+            background: lime;
+        }
+
+        .gua-clearfix::after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        .square {
+            position: relative;
+            top: -8px;
+            font-size: 12px;
+        }
+
+        .gua-parent {
+            position: relative;
+            width: 320px;
+            height: 100px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+        }
+
+        .gua-absolute {
+            position: absolute;
+            top: 40px;
+            right: 10px;
+        }
+
+        #id-button-fixed {
+            position: fixed;
+            bottom: 30px;
+            right: 10px;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            /*background: pink;*/
+            overflow: auto;
+            margin: 10px 20px 30px 40px;
+            padding: 5px 10px 15px 20px;
+            background: url("yw.gif") #cccccc no-repeat;
+        }
+
+    </style>
+</head>
+<body>
+    <h1 class="gua-pink" style="background: red;">hello gua h1</h1>
+    <h2 class="gua-pink">hello gua h2</h2>
+    <h3>hello gua h3</h3>
+    <h1 class="gua-pink" style="background: red;">good</h1>
+    <h4 id="id-h4-hello" class="gua-pink">
+        E = MC<span class="square">2</span>
+    </h4>
+    <button>vote</button>
+    <input type="text">
+    <span>inline</span>
+    <div class="gua-container gua-clearfix">
+        <div class="gua-box gua-left">left content</div>
+        <div class="gua-box gua-right">right content</div>
+    </div>
+    <p>xiao gua</p>
+    <div class="gua-parent">
+        <div class="gua-absolute">absolute element</div>
+    </div>
+    <button id="id-button-fixed">fixed button</button>
+    <div class="box">
+        hello world
+        hello world
+        hello world
+        hello world
+        hello world
+        hello world
+        hello world
+        hello world
+        hello world
+        hello world
+        hello world
+        hello world
+        hello world
+        hello world
+        hello world
+        hello world
+        hello world
+        hello world
+    </div>
+</body>
+</html>

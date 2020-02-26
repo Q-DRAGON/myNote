@@ -1,0 +1,6 @@
+mongo配置
+ip+port: 49.234.21.254:8005
+
+ssh root@49.234.21.254
+docker exec -it mongo mongo admin
+db.auto('admin', 'wor_mongo_password')

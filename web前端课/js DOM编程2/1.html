@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>fe9-1 鼠标移入改变背景色</title>
+        <style>
+            .gua-main {
+                width: 300px;
+                height: 300px;
+                margin: 0 auto;
+                text-align: center;
+                border: 1px solid red;
+            }
+
+            .red {
+                background: red;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="gua-main">
+            鼠标移入改变背景色
+        </div>
+        <script>
+            const log = console.log.bind(console)
+
+            const e = function(selector) {
+                let element = document.querySelector(selector)
+                if (element === null) {
+                    let s = `selector ${selector} not found`
+                    alert(s)
+                    //
+                    return null
+                } else {
+                    return element
+                }
+            }
+
+            const bindEvent = function() {
+                let d = e('.gua-main')
+                // 'mouseover' 是鼠标移入元素发生的事件
+                d.addEventListener('mouseover', function(event) {
+                    log('鼠标移入')
+                    // 给元素添加 'red' class
+                    // 这样就会拥有 .red 的样式
+                    d.classList.add('red')
+                })
+                // 'mouseout' 是鼠标移出元素发生的事件
+                d.addEventListener('mouseout', function(event) {
+                    log('鼠标移出')
+                    // 删除元素的 'red' class
+                    // 这样就会删除 .red 的样式
+                    d.classList.remove('red')
+                })
+            }
+
+            const __main = function() {
+                bindEvent()
+            }
+
+            __main()
+        </script>
+    </body>
+</html>

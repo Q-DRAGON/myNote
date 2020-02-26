@@ -1,0 +1,14 @@
+body {
+    background: pink;
+    height: 200px;
+}
+
+button {
+    width: 150px;
+    height: 30px;
+    line-height: 40px;
+    color: lightblue;
+    border: 0;
+    font-size: 12px;
+    dududu: 123;
+}

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,
+        initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>homework13</title>
+    <style>
+        .homework1{
+            height: auto;
+            min-width: 30%;
+            max-width: 250px;
+            border: 1px solid red;
+            margin: 0 auto;
+        }
+        @media all and (min-width: 100px) and (max-width: 300px){
+            body{
+                background: darkgreen;
+            }
+        }
+        button{
+            border-radius: 5px;
+            height: 20px;
+            font: 10px/10px italic bod;
+            text-align: center;
+            background: wheat;
+            border: 1px solid red;
+        }
+        button:hover{
+            cursor: pointer;
+            border: 1px solid red;
+            box-shadow: none;
+            box-sizing: content-box;
+            outline-style: none;
+        }
+        .homework1 span{
+            display: inline-block;
+            max-height: 20px;
+            padding: 2px 0;
+            font: 10px italic bod;
+            margin-left: 10px;
+            color: gray;
+        }
+        .play-list{
+            margin: 0 auto;
+            background-color: #444444;
+        }
+        .play-list-item{
+            text-align: center;
+            height: 20px;
+            color: lightgray;
+            font: 10px/20px italic bold;
+        }
+        .play-list-item + .play-list-item{
+            border-top: 1px solid;
+        }
+    </style>
+</head>
+<body>
+<div class="homework1">
+    <audio id="audio-menu" src="audioStore/1.mp3"></audio>
+    <button class="audio-play">play</button>
+    <button class="audio-pause">pause</button>
+    <span class="audio-duration"></span>
+    <span class="audio-currentTime">当前播放时间:0.00</span>
+    <div class="play-list">
+        <div class="play-list-item" data-path="audioStore/1.mp3">1.mp3</div>
+        <div class="play-list-item" data-path="audioStore/2.mp3">2.mp3</div>
+        <div class="play-list-item" data-path="audioStore/3.mp3">3.mp3</div>
+        <div class="play-list-item" data-path="audioStore/4.mp3">4.mp3</div>
+        <div class="play-list-item" data-path="audioStore/5.mp3">5.mp3</div>
+        <div class="play-list-item" data-path="audioStore/6.mp3">6.mp3</div>
+        <div class="play-list-item" data-path="audioStore/7.mp3">7.mp3</div>
+    </div>
+</div>
+<script>
+    var a = document.querySelector('#audio-menu')
+    var addEventHandle = function(){
+        var button = document.querySelectorAll('button')
+        for(var i = 0; i < button.length; i++){
+            button[i].addEventListener('click', function (event) {
+                var target = event.target
+                if(target.classList.contains("audio-play")){
+                    a.play()
+                }else if(target.classList.contains('audio-pause')){
+                    a.pause()
+                }
+            })
+        }
+
+    }
+
+    var currentTime = function(){
+        var time = new Date()
+        var day = time.getDay()
+        var month = time.getMonth() + 1
+        var year = time.getFullYear()
+        var hour = time.getHours()
+        var min = time.getMinutes()
+        var sec = time.getSeconds()
+        return `${hour}:${min}:${sec}, ${year}/${month}/${day}`
+    }
+
+    var timeToStandard = function(time){
+        var t = time / 60
+        return parseFloat(t).toFixed(2)
+    }
+
+    a.addEventListener('canplay',function(){
+        // audio 载入音乐需要时间, 载入完成后会触发 'canplay' 事件
+        // 所以我们在 canplay 里面设置时间
+        var durationSpan = document.querySelector('.audio-duration')
+        durationSpan.innerText = "总时长:" + timeToStandard(a.duration)
+    })
+    a.addEventListener('timeupdate', function(){
+        var timeSpan = document.querySelector('.audio-currentTime')
+        timeSpan.innerHTML = "当期播放时间:" + timeToStandard(a.currentTime)
+    })
+
+    var playList = document.querySelector('.play-list')
+    playList.addEventListener('click', function(event){
+        var target = event.target
+        if(target.classList.contains('play-list-item')){
+            var songSrc = target.dataset.path
+            a.src = songSrc
+        }
+    })
+
+    var songs = ['1.mp3', '2.mp3', '3.mp3'
+        , '4.mp3', '5.mp3', '6.mp3', '7.mp3']
+    var currentSongIndex = 0
+    a.addEventListener('ended', function(){
+        currentSongIndex = (currentSongIndex + 1) % songs.length
+        a.src = "audioStore/" + String(songs[currentSongIndex])
+        a.play()
+    })
+    addEventHandle()
+</script>
+</body>
+</html>

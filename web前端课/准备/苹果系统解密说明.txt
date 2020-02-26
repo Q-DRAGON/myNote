@@ -1,0 +1,7 @@
+注意，下面提到的 qq 需要换成你自己的 qq
+
+1, 打开终端
+2, 在终端输入 cd Desktop 然后回车
+3, 把 client_v66_qq 和 guavideo 文件放到桌面
+4, 在终端输入 chmod +x client_v66_qq 然后回车
+5, 在终端输入 ./client_v66_qq  fe1-1.guavideo 再回车，就可以解密，大约等待 15 分钟

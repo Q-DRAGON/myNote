@@ -1,0 +1,5 @@
+1. watch 模式
+上一节已经介绍了 webpack 的基本用法, 但是每当我们更新 js 文件都需要重新 build, 这样很麻烦
+所以这次在 webpack 配置中增加了 build 选项, 这样修改文件并且保存之后就会自动 build
+
+2. loader 机制

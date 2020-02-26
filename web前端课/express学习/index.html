@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>你好 gua</title>
+    </head>
+    <body>
+        <h1>你好 gua</h1>
+        <img src="/images/doge.gif">
+        <script>
+            const log = console.log.bind(console)
+
+            const ajax = (method, path, data, callback) => {
+                let r = new XMLHttpRequest()
+                r.open(method, path, true)
+                r.setRequestHeader('Content-Type', 'application/json')
+                r.onreadystatechange = () => {
+                    if (r.readyState === 4) {
+                        callback(r.response)
+                    }
+                }
+                r.send(data)
+            }
+
+            const apiTodoAll = (callback) => {
+                let method = 'GET'
+                let path = '/todo/all'
+                let data = {}
+                ajax(method, path, data, callback)
+            }
+
+            const apiTodoAdd = (task, callback) => {
+                let method = 'POST'
+                let path = '/todo/add'
+                let data = {
+                    task: task,
+                }
+                data = JSON.stringify(data)
+                ajax(method, path, data, callback)
+            }
+
+            const apiTodoDelete = (id, callback) => {
+                let method = 'GET'
+                let path = '/todo/delete/' + String(id)
+                let data = {}
+                ajax(method, path, data, callback)
+            }
+
+            const __main = () => {
+                apiTodoAdd('zelda 1', (r) => {
+                    log('add todo 1', r)
+                    apiTodoAdd('zelda 2', (r) => {
+                        log('add todo 2', r)
+                        apiTodoAdd('zelda 3', (r) => {
+                            log('add todo 3', r)
+                            apiTodoAll((r) => {
+                                log('before delete, all todo', r)
+                                apiTodoDelete(1, (r) => {
+                                    log('delete todo', r)
+                                    apiTodoAll((r) => {
+                                        log('after delete all todo', r)
+                                    })
+                                })
+                            })
+                        })
+                    })
+                })
+            }
+
+            __main()
+        </script>
+    </body>
+</html>

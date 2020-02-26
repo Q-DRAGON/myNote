@@ -1,0 +1,30 @@
+[
+  {
+    "author": "xiao",
+    "content": "博客一的评论",
+    "blog_id": 1,
+    "created_time": 1560778218,
+    "id": 1
+  },
+  {
+    "author": "xiao",
+    "content": "板凳",
+    "blog_id": 1,
+    "created_time": 1560778280,
+    "id": 2
+  },
+  {
+    "author": "xiaogua",
+    "content": "fe15",
+    "blog_id": 2,
+    "created_time": 1560778569,
+    "id": 3
+  },
+  {
+    "author": "gua",
+    "content": "test comment",
+    "blog_id": 1,
+    "created_time": 1560916142,
+    "id": 4
+  }
+]

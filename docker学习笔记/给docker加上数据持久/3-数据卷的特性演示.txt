@@ -1,0 +1,21 @@
+以下例子用于演示数据卷保存数据的特性
+
+# 没有保存在数据卷上的文件会在容器被删除之后丢失
+#
+# 执行命令在容器的 /b.txt 写入时间内容并查看
+docker exec demovolume sh -c 'date > /b.txt'
+docker exec demovolume sh -c 'cat /b.txt'
+# 删除容器后重新启动一个同名容器在查看，之前容器的内容已经没有了
+docker rm -f demovolume
+docker run -d --name demovolume --mount source=web,target=/volume webimage
+docker exec demovolume sh -c 'cat /b.txt'
+
+# 保存在数据卷上的文件，即使容器被删除仍然存在
+docker exec demovolume sh -c 'date > /volume/b.txt'
+docker rm -f demovolume
+docker run -d --name demovolume --mount source=web,target=/volume webimage
+docker exec demovolume sh -c 'cat /volume/b.txt'
+
+# 多容器之间可以通过数据卷共享文件
+docker run -d --name demovolume2 --mount source=web,target=/v2 webimage
+docker exec demovolume2 sh -c 'cat /v2/b.txt'

@@ -1,0 +1,52 @@
+准备：
+
+工具：
+potplayer/xplayer 一个倍速播放器 
+guavideo  上课视频解码工具
+webstorm 
+配置：
+Editor->js->parameter下划线
+Eiditor->generator->typo波浪线
+秘钥网址：http://idea.lanyus.com
+快捷键:
+Tab, shift + tab,  command + shift + z
+
+// JS 的历史现状和位置
+// 什么是 ES6，有什么新东西
+// 什么是 node.js，有什么用
+// node.js 的开发工具 WebStorm 的安装使用
+// 用 node.js 开发脱离浏览器的 js 程序
+// （主要用于工具或者服务端，比如文件处理）
+//
+// 不懂的地方稍微几个笔记，等上课讲解
+
+
+// 使用管理员模式安装 yarn/node 之后，在命令行里面输入 yarn/node --version
+// 如果输出了版本号（你的结果可能和我不一样）就表示安装成功
+// 如果安装失败了，在群里 at 我
+// 苹果系统使用 homebrew 安装 yarn，如果你不会这个，等上课讲
+
+
+// windows 下面打开命令行的方式为
+// 1. 同时按下 Windows 和 R 这两个键
+// 2. 然后在输入框输入 cmd， 并且回车
+
+
+// 输入 yarn --version
+// 输出结果如下
+➜  ~ yarn --version
+1.16.0
+
+// 输入 node --version
+// 输出结果如下
+➜  ~ node --version
+v12.2.0
+
+// mac 需要先安装 homebrew, 然后才能安装 yarn
+// 安装 homebrew 的方式如下
+把下面这句命令粘贴到终端(Terminal) 运行
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+安装完 homebrew 之后在终端输入下面的命令安装 yarn
+brew install yarn
+

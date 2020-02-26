@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>spa hash demo</title>
+    </head>
+    <body>
+        <h1>spa hash demo</h1>
+        <ul>
+            <li>
+                <a href="#/">home</a>
+                <a href="#/arena">arena</a>
+                <a href="#/questions?name=gua">questions</a>
+                <a href="#/classroom?name=gua&height=169">classroom</a>
+            </li>
+        </ul>
+        <div class="route"></div>
+        <script>
+            // SPA(Single Page Application) 说的是当页面的内容变化的时候, 还处于当前页面
+            // 这样的话加载内容更少, 速度更快, 体验更好
+            // 如果直接采用 ajax 刷新的话, 其实也可以实现功能, 但是并没有记住页面状态的能力, 因为 URL 没有变化
+            // 而路由可以用来记住相应的状态
+            // 在 HTML5 之前, 一般会采用 hash 来实现路由, hash 发生变化的时候页面并不会刷新
+            const log = console.log.bind(console)
+
+            const renderHtml = (text) => {
+                let element = document.querySelector('.route')
+                element.innerHTML = text
+            }
+
+            const responseForPath = (path) => {
+                let mapper = {
+                    '/': 'home page',
+                    '/arena': 'arena page',
+                    '/questions': 'question page',
+                    '/classroom': 'classroom page',
+                }
+                if (path in mapper) {
+                    return mapper[path]
+                } else {
+                    return 'not found'
+                }
+            }
+
+            const argsFromQuery = (query) => {
+                let o = {}
+                let qs = query.split('&')
+                qs.forEach(e => {
+                    let [k, v] = e.split('=')
+                    o[k] = v
+                })
+                return o
+            }
+
+            const parsedUrl = (url) => {
+                // 这个时候 url 的格式是 /about?name=gua, 因为 # 已经通过 slice 去掉了
+                let path = ''
+                let query = {}
+                let index = url.indexOf('?')
+                if (index > -1) {
+                    path = url.slice(0, index)
+                    let q = url.slice(index + 1)
+                    query = argsFromQuery(q)
+                } else {
+                    path = url
+                }
+                // 直接返回 object 的简写形式
+                return {
+                    path,
+                    query,
+                }
+            }
+
+            const render = () => {
+                // 通过 location.hash 拿到当前 hash 值, 格式为 #/about?name=gua
+                // 注意, 这里用的是 #/about, 可能有人会使用 #about, 后者看似省了「/」 这个字符, 但其实更麻烦
+                // 因为采用 #/about 的话, # 后面是一个完整的 url, 完全复用以前处理 url 的函数
+                log('location.hash', location.hash)
+                // 再用 parsedUrl 解析这个地址, 得到 path 和 query
+                let { path, query } = parsedUrl(location.hash.slice(1))
+                log('path and query', path, query)
+                let r = responseForPath(path)
+                renderHtml(r)
+            }
+
+            const bindEventHashChange = () => {
+                window.addEventListener('hashchange', (event) => {
+                    // event.oldURL 表示变化之前的 URL, event.newURL 表示变化之后（也就是现在）的 URL
+                    // log('event url', event.oldURL, event.newURL)
+                    render()
+                })
+            }
+
+            const bindEventLink = () => {
+                let links = document.querySelectorAll('a')
+                for (let l of links) {
+                    l.addEventListener('click', (event) => {
+                        render()
+                    })
+                }
+            }
+
+            const bindEvents = () => {
+                // 监听路由的变化有两种思路
+                // 一个是使用 window 的 hashchange 事件完成
+                // 另一个是监听其他导致路由发生变化的操作, 比如点击 a 标签之后路由发生变化, 那么就监听 a 的 click 事件
+
+                // 下面两个方式请自己尝试
+                bindEventHashChange()
+                // bindEventLink()
+            }
+
+            const setup = () => {
+                // 第一次进入页面的时候, 开始渲染内容
+                render()
+            }
+
+            const __main = () => {
+                bindEvents()
+                setup()
+            }
+
+            // DOMContentLoaded 事件表示 HTML 已经加载(渲染)到页面中, 这个时候操作 DOM 元素就没有问题
+            document.addEventListener('DOMContentLoaded', () => {
+                __main()
+            })
+        </script>
+    </body>
+</html>

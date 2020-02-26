@@ -1,0 +1,28 @@
+自动部署到生产服务器
+(注意：这个生产服务器已经预先安装好了docker)
+
+要在测试成功后自动部署，最好使用ssh连接到生产服务器（比密码更安全）
+所以先在生服务器上生成RSA秘钥，并添加访问权限
+
+# 生成无密码的公钥和私钥
+ssh-keygen -t rsa -f /tmp/id_rsa
+# 添加公钥，以便让这个私钥可以访问生产服务器
+cat /tmp/id_rsa.pub >> ~/.ssh/authorizd_keys
+
+ssh 访问生产服务器的配置见 .drone.yml 文件
+配置完成后，测试一下，可以看到现在已经可以执行任意命令了
+
+要实现自动部署，可以选择在生产服务器上使用git来拉取新代码
+那么首先去生产服务器初始化一次，代码目录为 /home/ubuntu/todo
+cd /home/ubuntu
+git clone http://111.231/98.114:3000/kuaibiancheng.com/todo.gt
+以后每次直接去代码目录 git pull 在重新运行项目即可
+
+部署项目的脚本如下:
+script:
+  - cd /home/ubuntu/todo
+  - git pull
+  - sudo sh update.sh
+
+  部署成功后，访问下面链接来使用
+  http://123.286.118.235:5000/

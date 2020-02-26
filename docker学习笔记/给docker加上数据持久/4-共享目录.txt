@@ -1,0 +1,26 @@
+共享目录（bind volume）
+
+除了挂载数据卷以外，docker还可以挂载共享目录（这一点和虚拟机一样）
+共享目录的优势是使用方便，易于理解，可以在某些场景下方便使用
+（比如开发室在宿主机中修改源代码docker中实时生效省却build镜像的过程）
+
+下面用一个具体的例子来演示挂载共享目录的用法
+下面的命令会从nginx镜像运行一个名为nginx1的容器
+并且设置了8080：80的端口映射
+--mount 参数的 type=bind 表明要挂载的共享目录
+
+把宿主机的当前目录映射为容器的 /usr/share/nginx/html
+(这是nginx 容器的静态页面文件存放路径)
+这样在宿主机中访问localhost:8080会自动访问宿主机当前目录下的index.html文件
+（这是nginx的默认静态文件首页）
+
+因为这一行命令比较长，我们用了折行符号 \
+docker run -p 8080:80 \
+    --name nginx1 \
+    --mount type=bind,source="${PWD}",target=/usr/share/nginx/html/ \
+    nginx
+
+需要注意的是source参数必须使用绝对路径
+所以这里使用"${PWD}"的方式来在 Mac/Linux/Windows 中获取当前目录路径
+这是一个可以在多平台通用的获取当前目录路径的方法 (windows下必须使用PowerShell)
+加引号是因为路径中可能含有空格等特殊符号，如果路径有空格而未加引号，会产生错误

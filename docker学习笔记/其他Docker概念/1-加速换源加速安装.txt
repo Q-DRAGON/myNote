@@ -1,0 +1,28 @@
+换源加速安装
+
+很多软件默认的安装地址在国外，如果是在国内从默认地址下载，速度可能会很慢
+所以我们可以通过使用国内软件源的方式加速软件下载
+
+Docker镜像源可以替换为中科大镜像源（linux）
+https://lug.ustc.edu.cn/wiki/mirrors/help/docker
+镜像地址如下（本机mac/windows）
+点击鲸鱼图标docker-hub, 选择preferences, 然后添加下面的镜像地址
+https://docker.mirrors.ustc.edu.cn/
+
+linux服务器换了后要用如下命令重启Docker才能生效
+service docker restart
+
+换了后试一下速度会变得很快
+docker run ubuntu:16.04
+
+容器内的源
+apt 源
+阿里云,点帮助按钮
+https://opsx.alibaba.com/mirror
+pip源
+/root/.pip/pip.conf
+测试安装速度
+docekr build -t customimage .
+淘宝npm源
+https://npm.taobao.org/
+其他语言/库的安装源

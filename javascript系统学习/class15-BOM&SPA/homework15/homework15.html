@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>todo_spa完整版</title>
+    <link rel="stylesheet" href="homework15.css">
+</head>
+<body>
+<div class="todo-nav">
+    <button class="todo-tab" data-page="todo-new" id="todo-new">新的todo</button>
+    <button class="todo-tab" data-page="todo-edit" id="todo-edit">编辑todo</button>
+    <button class="todo-tab" data-page="todo-list" id="todo-list">所有todo</button>
+</div>
+
+<div class="todo-cell todo-new todo-page">
+    <input type="text" id="input-todo" value="">
+    <span>创建一个todo</span>
+    <button type="button" id="button-todo-add">commit</button>
+</div>
+<div class="todo-cell todo-edit todo-page"></div>
+<div class="todo-cell todo-list todo-page"></div>
+
+<script src="todo-sql.js" charset="utf-8" type="text/javascript"></script>
+<script src="todo-page.js" charset="utf-8" type="text/javascript"></script>
+<script src="todo-event.js" charset="utf-8" type="text/javascript"></script>
+</body>
+</html>

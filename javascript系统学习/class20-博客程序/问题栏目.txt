@@ -1,0 +1,20 @@
+class15的问题：
+	1，document发生变化后，用。。。。
+	2，模板字符串中中文乱码
+
+class20的问题：(##代表提醒)
+	1, 在request ajax 得到的blog data 后通过api/blog/add 这个url
+		发送数据的时候，请求数据中的body字段无数据，不知道为什么？
+	## 3,	通过.blog-title,使用dataset.id获取id,再从window.blog
+	   	中查询id来获取相应博客
+	## 4,	markdown的编译效果:
+		!{mahua}(maua-logo.jpg)
+		##麻花是什么？
+		- 一个在线编辑Markdown文本的编译器
+
+		```javascript
+    		var ihubo = {
+        	nickName: "草伊山"
+        	site: "http://jser.me"
+    		}
+		```

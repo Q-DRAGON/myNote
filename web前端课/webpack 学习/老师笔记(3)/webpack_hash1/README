@@ -1,0 +1,13 @@
+1. 使用 hash 解决缓存问题
+一般来说, 前端的静态资源(主要是 js 和 css)会被缓存, 通常缓存的方案是加上一个摘要(hash)值
+比如 a.js 会变成 a_${hash}.js
+如果 a.js 内容发生变化, 那么 hash 值也会发生变化
+这样就可以解决缓存的问题
+
+可以在 build 之后运行 index.html查看效果
+
+但是使用这个方案会有一个问题, 因为 index.html 里面需要手动写好 build 之后的 js 文件名称
+如果 js 的内容发生变化, 那么 [chunkhash] 的值也会发生变化
+这样的话每次都需要先 build 然后手动更改 index.html 里面 js 文件名称, 非常麻烦
+
+我们在 webpack_hash2 里面解决这个问题

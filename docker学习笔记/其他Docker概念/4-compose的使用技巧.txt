@@ -1,0 +1,27 @@
+端口绑定：
+
+默认的8000:3000 形式实际上是 0.0.0.0:8000:3000
+它表示任意机器都能访问本机的8000端口
+很多时候我们不希望暴露服务端口，希望只有本机能够访问
+这时候我们应该写成如下形式：
+127.0.0.1:8000:3000
+
+查看日志，在项目中
+使用 docker-compose logs 可以查看一个compose项目的日志
+使用 docker-compose logs pyweb 的形式可以只查看某个特定服务的
+
+compose的多文件和覆盖配置
+当我们使用docker-compose up 启动 compose项目的时候
+实际上相当于 docker-compose -f docker-compose.yml up
+
+compose 的多文件和覆盖配置
+当我们使用docker-compose up 启动 compose项目的时候
+实际上相当于 docker-compose -f docker-compose.yml up
+
+我们可以用多个不同的compose配置文件来实现不同的启动方式
+我们可以用 init.yml 用于初始化
+我们可以用 debug.yml 用于启动调试模式
+
+我们还可以使用多个配置文件的组合方式(参考compose文件)
+docker-compose -f docker-compose.yml -f debug.yml up
+docker-compose -f docker-compose.yml -f test.yml up

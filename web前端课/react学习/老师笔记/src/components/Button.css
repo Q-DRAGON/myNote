@@ -1,0 +1,56 @@
+.gua-button {
+    margin-right: 8px;
+    margin-bottom: 12px;
+}
+
+.gua-button {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid #d9d9d9;
+    white-space: nowrap;
+    padding: 0 15px;
+    font-size: 14px;
+    border-radius: 4px;
+    height: 32px;
+    user-select: none;
+    transition: all .3s cubic-bezier(.645,.045,.355,1);
+    position: relative;
+}
+
+.gua-button:hover,
+.gua-button:focus {
+  color: #40a9ff;
+  background: #fff;
+  border-color: #40a9ff;
+  outline: 0;
+  text-decoration: none;
+}
+
+.gua-button:active {
+  color: #096dd9;
+  background-color: #fff;
+  border-color: #096dd9;
+}
+
+.gua-button-primary {
+  color: #fff;
+  background-color: #1890ff;
+  border-color: #1890ff;
+}
+
+.gua-button-primary:hover,
+.gua-button-primary:focus {
+  color: #fff;
+  background-color: #40a9ff;
+  border-color: #40a9ff;
+}
+
+.gua-button-primary:active {
+  color: #fff;
+  background-color: #096dd9;
+  border-color: #096dd9;
+}

@@ -1,0 +1,81 @@
+/*查询*/
+-- # 检索单个列
+SELECT prdo_name from products;
+-- # 检索多个列
+SELECT prod_id, prod_name FROM products;
+-- # 检索所有列
+SELECT * FROM products;
+-- # 检索不同的行
+SELECT DISTINCT vend_id FROM products;
+-- # 限制结果
+SELECT prod_name FROM products LIMIT 5;
+SELECT prod_name FROM products LIMIT 5,5;
+-- # 使用完全限定的表明
+SELECT products.prod_name FROM products;
+-- # 排序数据
+SELECT prod_name FROM products ORDER BY prod_name;
+-- # 按多个列排序
+SELECT prod_price, prod_name FROM products ORDER BY prod_price, prod_name
+-- # 指定排序方向
+SELECT prod_price, prod_name FROM products ORDER BY prod_price, prod_name DESC
+SELECT prod_price, prod_name FROM products ORDER BY prod_price DESC, prod_name
+-- # WHERE 子句操作符
+-- =, !=, <, <=, BETWEEN, IS
+SELECT prod_name FROM products WHERE prod_price IS NULL;
+-- 组合 WHERE 子句
+SELECT prod_id, prod_price, prod_name FROM products
+WHERE vend_id = 1003 AND prod_price <= 10;
+
+SELECT prod_id, prod_price, prod_name FROM products
+WHERE vend_id = 1003 OR vend_id = 1002;
+
+-- 计算次序, AND 高于 OR
+SELECT prod_id, prod_price FROM products
+WHERE (vend_id = 1003 OR vend_id = 1002) AND prod_price >= 10;
+
+-- IN 操作符
+SELECT prod_name, prod_price FROM products
+WHERE vend_id IN (1002, 1003) ORDER BY prod_name;
+
+-- NOT操作符
+SELECT prod_name, prod_price FROM products
+WHERE vend_id NOT IN (1002, 1003) ORDER BY prod_name;
+
+-- 通配符 %， LIKE，_
+SELECT prod_id, prod_price, prod_name FROM products
+WHERE prod_name LIKE 'jet%';
+
+SELECT prod_id, prod_price, prod_name FROM products
+WHERE prod_name LIKE '%_jet_%';
+
+
+SELECT prod_name from products WHERE prod_name REGEXP '//(^chen [0-9]{4} stick? //)'
+
+SELECT COUNT (*) AS num_items,
+       MIN (prod_price) AS price_min,
+       max(prod_price) AS price_max
+       FROM products
+
+SELECT cust_id from orders where order_num in (
+  select order_num from orderitems where prod_Id = 'TNT2'
+)
+
+INSERT INTO customers(cust_name, cust_address)
+VALUES ('woyao', 'main street'),
+       ('woruo', 'galaxy way')
+
+
+UPDATE customers SET cust_email = 'elmer@fudd.com'
+WHERE cust_id = 10005;
+
+
+DELETE FROM customers WHERE cust_id = 10006;
+
+ALTER TABLE vendors ADD vend_phone CHAR (20);
+ALTER TABLE vendors DROP COLUMN vend_phone;
+
+DROP TABLE customers;
+rename TABLE customers2 to customers;
+
+
+

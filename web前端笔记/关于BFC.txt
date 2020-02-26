@@ -1,0 +1,14 @@
+什么是BFC元素：
+（float, diaplay, position, overflow）是下面这些定义的话
+浮动元素，
+绝对定位元素(absolute, fixed)
+带有overflow(值不能是visible)属性
+display为flow-root的元素，行内块元素(inline-block) 表格单元格(table-cell)，弹性元素(flex),
+网格元素(grid)
+
+规则：
+1， BFC 元素的子元素如果是 float 元素，那么 BFC 元素是会包住 float 元素的
+2， BFC 元素和 float 元素不会叠加在一起
+3， 两个 bfc 元素垂直方向上的 margin 不会叠加
+
+具体看前端的资料

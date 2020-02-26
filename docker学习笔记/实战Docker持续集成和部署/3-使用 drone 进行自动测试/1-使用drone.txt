@@ -1,0 +1,12 @@
+首先在drone 的网页中打开对仓库的监听
+点开仓库的详细页面
+
+drone 使用 。drone.yml 文件配置自动测试
+如果drone监听了一个仓库，仓库的根目录下有.drone.yml文件
+drone就会使用.drone.yml 文件中定义的步骤测试代码并做一些自定义的操作
+自定义的操作包括通知，自动部署等
+
+详见.drone.yml 文件
+
+如果你有其他需求，下面是drone 的文档地址，请自行参阅
+http://readme.drone.io/

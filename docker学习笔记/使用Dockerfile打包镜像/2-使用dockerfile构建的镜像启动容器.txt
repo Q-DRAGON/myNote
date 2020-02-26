@@ -1,0 +1,13 @@
+本文件夹下有3个文件(app.py 和 dockerfile )
+直接运行下面的命令构建镜像
+
+# 命令中参数 -t webimage 指定了镜像的名字为 webimage
+# 这个名字可以用于在之后从镜像启动容器
+# 最后那个 . 用来指定构建镜像时候的工作目录为本机当前目录
+docker build -t webimage .
+
+# 可以使用下面的命令查看本机存储的镜像 (包括下载的和构建的)
+docker images
+
+# 运行容器
+docker run -p 8001:5000 --name demo2 webimage

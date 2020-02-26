@@ -1,0 +1,16 @@
+.gua-blogs {
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.gua-blog-cell {
+    display: flex;
+    /*justify-content: space-between,（充满边框，相邻有间隙）
+            space-around, center, flex-start, flex-end
+            为子元素的div布局，
+    */
+    justify-content: space-between;
+    margin: 5px 0;
+    outline: solid 1px lightblue;
+}

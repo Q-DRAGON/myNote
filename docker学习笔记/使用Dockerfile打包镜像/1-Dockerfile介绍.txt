@@ -1,0 +1,44 @@
+使用Dockerfile 打包一个镜像并运行
+
+我们刚才在一个基础的ubuntu镜像中运行了我们的程序
+但是运行程序的过程手动执行行命令式一件很麻烦的事情
+
+接下来我们又把执行的命令协程了脚本，提高了一定的效率
+如果要启动多个容器，我们的自制脚本每次都要重新安装配置一次
+这个过程是很耗时的
+
+实际上docker也提供了方案来应对这样的场景
+docker 可以让我们自行编写配置文件（名为Dockerfile）来构建一个镜像
+这样我们就可以轻松地从自定义构建的镜像中启动多个容器
+所以在实际使用中，我们会把整个程序打包成一个新的docker
+
+下面介绍使用dockerfile打包镜像的方法
+
+首先在当前目录下创建dockerfile文件
+# 在dockerfile文件中 #是注释
+# FROM用于指定构建镜像使用的基础镜像
+FROM ubuntu:18.04
+
+# RUN 用于在构建镜像的时候在镜像中执行命令
+# 这里我们安装python3 和 flask web 框架
+RUN apt update
+RUN apt -y install python3 python3-pip
+RUN pip2 insatll flask
+
+# COPY 相当于命令的 docker cp
+# 把本机当前目录下的app.py文件拷贝到镜像的 /code/app.py
+# 和docker cp 不同的是， COPY 会自动创建镜像中不存在的目录, 比如/code
+COPY app.py /code/app.py
+
+# WORKDIR 用于指定从镜像启动的容器内的工作目录
+WORKDIR /code
+
+# CMD 用于指定容器运行后要执行的命令和参数列表
+# 这样从本镜像启动容器后会自动执行 python3 app.py 这个命令
+#
+# 由于我们已经用WORDKDIR指定了容器的工作目录
+# 所以以下的命令都是在 /code 下执行的
+CMD ["python3", "app.py"]
+
+# 你可能会看到有资料介绍一个 ENTRYPOINT 参数用于指定容器运行后的入口程序
+# 但是这个参数在现在的意义已经很小了，请忽略

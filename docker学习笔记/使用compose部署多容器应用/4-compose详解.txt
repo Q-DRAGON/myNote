@@ -1,0 +1,6 @@
+compose1 目录中的项目由 pyweb redisdemo 2个容器组成
+    pyweb 用于显示一个页面
+    redisdemo 用于统计页面点击次数
+
+docker-compose.yml 文件解释
+app.py 里访问 redis

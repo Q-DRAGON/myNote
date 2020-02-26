@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>双栏布局</title>
+        <style>
+            .case {
+                padding: 10px;
+                margin: 20px;
+                border: 1px solid #eee;
+            }
+            
+            .gua-left {
+                float: left;
+            }
+
+            .gua-right {
+                float: right;
+            }
+
+            .gua-clearfix::after {
+                content: ' ';
+                display: block;
+                clear: both;
+            }
+
+            .column-left {
+                width: 200px;
+                background: lightblue;
+            }
+
+            .column-right {
+                width: 400px;
+                background: lightpink;
+            }
+
+            /* 这里通过 BFC 的方式来解决 float 的问题, 具体可以查看 http://www.iyunlu.com/view/css-xhtml/55.html */
+            .bfc {
+                overflow: hidden;
+            }
+
+            /* 具体可以查看 http://www.iyunlu.com/view/css-xhtml/64.html */
+
+            /* 注意 inline-block 会有一定的缝隙, 可以通过下面的方式解决,
+               先在父元素上面通过把 letter-spacing 设置为负值, 然后把 inline-block 元素设置为正常值
+               当然这里的 -5px 是和文字大小有关系的, 具体看上面的链接
+            */
+            .inline-block-row {
+                letter-spacing: -5px;
+            }
+
+            .inline-block {
+                display: inline-block;
+                letter-spacing: normal;
+            }
+
+            /* 注意, 尽管 table 不是用来布局而是用来展示数据的, 但是这里为了演示所以直接用了
+               并且我们没有使用 table 标签, 而是通过 display 的 table 值来设置的
+            */
+            .table-row {
+                display: table-row;
+            }
+
+            .table-cell {
+                display: table-cell;
+            }
+
+            .position-row {
+                position: relative;
+                height: 100px;
+                background: lightgray;
+            }
+
+            .position-left {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+
+            .position-right {
+                position: absolute;
+                /* 这里的 400 是左边 column 的宽度 */
+                left: 400px;
+                top: 0;
+            }
+
+            /*
+            除了这些布局方案，还有 css3 的 flex 和 grid 也完全可以实现两栏布局, 而这些是 css3 之前的经典布局方案
+            其中 bfc 和 table 完全可以用来实现流式布局(即一边固定宽度, 另一边的宽度随着页面宽度的变化而变化)
+            */
+        </style>
+    </head>
+    <body>
+        <div class="case">
+            <h3>float 方案 1</h3>
+            <div class="gua-row gua-clearfix">
+                <div class="gua-left column-left">
+                    left
+                </div>
+                <div class="gua-left column-right">
+                    right
+                </div>
+            </div>
+        </div>
+
+        <div class="case">
+            <h3>float 方案 2</h3>
+            <div class="gua-row gua-clearfix">
+                <div class="gua-left column-left">
+                    left
+                </div>
+                <div class="column-right bfc">
+                    right
+                </div>
+            </div>
+        </div>
+
+        <div class="case">
+            <h3>inline block 方案</h3>
+            <div class="gua-row inline-block-row">
+                <div class="inline-block column-left">
+                    left
+                </div>
+                <div class="inline-block column-right">
+                    right
+                </div>
+            </div>
+        </div>
+
+        <div class="case">
+            <h3>table 方案</h3>
+            <div class="gua-row table-row">
+                <div class="table-cell column-left">
+                    left
+                </div>
+                <div class="table-cell column-right">
+                    right
+                </div>
+            </div>
+        </div>
+
+        <div class="case">
+            <h3>position 方案</h3>
+            <div class="position-row">
+                <div class="position-left column-left">
+                    left
+                </div>
+                <div class="position-right column-right">
+                    right
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

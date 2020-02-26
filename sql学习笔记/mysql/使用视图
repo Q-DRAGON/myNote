@@ -1,0 +1,5 @@
+CREATE VIEW productCustomers AS
+select cust_name, cust_contact, prod_id
+from customers, orders, orderitems
+WHERE customers.cust_id = orders.cust_id
+and orderitems.order_num = orders.order_num;

@@ -1,0 +1,10 @@
+1. plugin 机制
+webpack_hash1 里面提到现有的 hash 方案很不方便, 因为只有 build 之后才能知道文件名称
+如果能自动更换文件名称就很好
+我们可以使用 HtmlWebpackPlugin 来解决这个问题
+
+具体查看 webpack.config.js 里面 plugins 的配置
+
+HtmlWebpackPlugin 用来生成 html 文件
+MiniCssExtractPlugin 用来提取 css 内容到单独文件
+CleanWebpackPlugin 用来清除某一个目录, 我们清除的是 dist 目录

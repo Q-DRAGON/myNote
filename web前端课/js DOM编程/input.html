@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>input</title>
+</head>
+<body>
+    <h1>下面的 input 标签只能输入数字</h1>
+    <input id='id-input-number' placeholder='只能输入数字'>
+    <script>
+    const log = console.log.bind(console)
+
+    const e = function(selector) {
+        let element = document.querySelector(selector)
+        if (element === null) {
+            let s = `元素没找到，选择器 ${selector} 没有找到或者 js 没有放在 body 里`
+            alert(s)
+            // return null, 方便后续处理 e 函数的返回值
+            return null
+        } else {
+            return element
+        }
+    }
+
+    const __main = function() {
+        // 选择后直接调用 addEventListener 也行
+        // input 事件是用户在 input 标签中输入数据的时候会触发的事件
+        // 也就是说你每输入一个字符, 这个事件就会触发一次
+        e('#id-input-number').addEventListener('input', function(event) {
+            // 每个 event 都有 target
+            // target 是触发事件的元素, 在这里, 它是 input#id-input-number 这个标签
+            let target = event.target
+            // 我们把 value 输出看看
+            // input 标签的 .value 属性可以用来获取用户输入的值
+            // 不同类型的标签能获取到的值是不一样的
+            log('输入的是', target.value)
+            // 来删掉非数字字符
+            let digits = '1234567890'
+            let v = target.value
+            // 拿到字符串中的最后一个字符
+            // 也可以用 v.slice(-1) 来拿
+            let lastChar = v[v.length - 1]
+            // 如果最后一个字符(也就是刚输入的字符)不是数字(注意开头的取反符号 !)
+            if (!digits.includes(lastChar)) {
+                // 要设置 target.value, 设置 v 是没用的
+                let s = v.slice(0, -1)
+                target.value = s
+                log('包含了非数字字符, 重新设置为', s)
+            }
+        })
+    }
+
+    __main()
+    </script>
+</body>
+</html>

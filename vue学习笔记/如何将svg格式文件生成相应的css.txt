@@ -1,0 +1,7 @@
+进入:
+https://icomoon.io/
+点击导入importIcons,选中导入的图片
+点击GenerateFont
+选择preference设置图标的FontName
+然后选择Download
+下载后将style.css文件和fonts文件导入工程

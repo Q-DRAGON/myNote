@@ -1,0 +1,5 @@
+docker run -d -t -p 8000:5000 --name demo ubuntu:18.04
+我们用exec参数在运行的docker容器中执行命令安装必要的的依赖库
+docker exec demo apt update
+docker exec apt -y install python3 python3-pip
+docker exec demo pip3 install flask

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,
+        maximum-scale=1.0, user-scalable=no">
+    <title>class 13</title>
+    <style>
+        @media all and (min-width: 200px) and (max-width: 300px){
+            body{
+                background: blueviolet;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>头</header>
+<nav>导航</nav>
+<article>
+    <section>音频</section>
+    <audio id="id-audio-player" controls="controls">
+        <source src="audio.mp3">
+        <source src="audio.ogg">
+    </audio>
+    <section>视频</section>
+    <video width="300" height="200" controls="controls">
+        <source src="movie.mp4">
+        <source src="movie.ogv">
+    </video>
+</article>
+<aside>
+    侧栏:
+    <input type="calendar">
+    <input type="email">
+    <input type="color">
+</aside>
+<canvas>
+
+</canvas>
+<footer>
+    页脚:
+    <input type="checkbox">
+    <input type="checkbox" checked>
+    <input type="checkbox" checked="false">
+    <input type="checkbox" checked="checked">
+</footer>
+
+<script>
+    var a = document.querySelector('#id-audio-player')
+    a.play()
+    a.pause()
+    a.autoplay()
+    a.playbackRate = 3
+    a.src = 'video1.mp3'
+    a.currentTime = 1
+    a.duration()
+    a.volume = 1
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+-- 搜索支持
+-- match()指定搜索列，against()指定要使用的搜索表达式
+CREATE TABLE productNotes(
+  noted_id int NOT  null auto_increment,
+  prod_id char(10) not NULL ,
+  note_text text NULL,
+  PRIMARY KEY (noted_id),
+  FULLTEXT(note_text)
+)ENGINE=MyISAM
+
+select note_text FROM productNotes
+WHERE MATCH(note_text)against('rabbit');
+
+-- 查询扩展
+SELECT note_text FROM productNotes
+WHERE MATCH(note_text)against('anvils' WITH query expansion)
+
+-- 布尔方式
+select note_text FROM productNotes
+WHERE MATCH(note_text)against('rabbit -rope*'IN boolean mode);
+/*
++ 包含，词必须存在
+- 排除，词必须不出现
+> 包含，而且增加等级值
+< 包含，且减少等级值
+() 把词组成子表达式（允许这些子表达式作为一个组被包含、
+排除、排列等）
+~ 取消一个词的排序值
+* 词尾的通配符
+"" 定义一个短语（与单个词的列表不一样，它匹配整个短语以
+便包含或排除这个短语）
+*/

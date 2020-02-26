@@ -1,0 +1,49 @@
+详解： https://segmentfault.com/a/1190000004168886
+
+组件的生命周期分成三个状态：
+Mounting：已插入真实 DOM
+Updating：正在被重新渲染
+Unmounting：已移出真实 DOM
+
+
+React 为每个状态都提供了两种处理函数，will 函数在进入状态之前调用，
+did 函数在进入状态之后调用，三种状态共计五种处理函数。
+
+
+componentWillMount()
+componentDidMount()
+componentWillUpdate(object nextProps, object nextState)
+componentDidUpdate(object prevProps, object prevState)
+componentWillUnmount()
+
+React 还提供两种特殊状态的处理函数。
+componentWillReceiveProps(object nextProps)：已加载组件收到新的参数时调用
+shouldComponentUpdate(object nextProps, object nextState)：组件判断是否重新渲染时调用
+
+
+当组件在客户端被实例化，第一次被创建时，以下方法依次被调用：
+1、getDefaultProps
+2、getInitialState
+3、componentWillMount
+4、render
+5、componentDidMount
+
+
+当组件在服务端被实例化，首次被创建时，以下方法依次被调用：
+1、getDefaultProps
+2、getInitialState
+3、componentWillMount
+4、render
+componentDidMount 不会在服务端被渲染的过程中调用。
+
+销毁时：（像关闭提示框组件）
+componentWillUnmount
+每当React使用完一个组件，这个组件必须从 DOM 中卸载后被销毁，此时 componentWillUnmout 会被执行，完成所有的清理和销毁工作，在 componentDidMount 中添加的任务都需要再该方法中撤销，如创建的定时器或事件监听器。
+
+当再次装载组件时，以下方法会被依次调用：
+
+1、getInitialState
+2、componentWillMount
+3、render
+4、componentDidMount
+

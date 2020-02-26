@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>fe9-1 鼠标移入改变背景色</title>
+    <style>
+        .gua-box {
+            width: 200px;
+            height: 100px;
+            margin: 0 auto;
+            background: lightcyan;
+            transition: width 2s, height 2s;
+        }
+
+        .gua-box:hover {
+            width: 100px;
+            height: 200px;
+        }
+
+        img {
+            display: block;
+            width: 100px;
+            height: 100px;
+            transform: scale(0.8);
+            transition: transform 2s;
+        }
+
+        img:hover {
+            /*
+            transform 是 css3 提供的变换属性，功能非常强大
+            */
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body>
+<div class="gua-box">
+    gua box
+</div>
+<div>
+    <img src="1.jpg" alt="1 jpg">
+    <img src="2.jpg" alt="2 jpg">
+    <img src="3.jpg" alt="3 jpg">
+</div>
+<script src="gua.js"></script>
+<script>
+
+</script>
+</body>
+</html>

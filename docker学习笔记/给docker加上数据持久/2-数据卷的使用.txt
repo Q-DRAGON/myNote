@@ -1,0 +1,22 @@
+数据卷的使用
+
+# 创建一个volume
+docker volume create testvolume
+
+# 列出所有数据卷
+docker volume ls
+
+# 删除一个数据卷
+docker volume rm testvolume
+
+我们下面来看一下如何在容器中使用数据卷
+# 先创建数据卷
+docker volume create web
+在运行容器的时候，使用参数--mount 如下
+docker run -d --name demovolume --mount source=web,target=/volume webimage
+
+下面的参数含义是把数据卷挂载到容器的/volume目录上面
+--mount source=web, target=/volume
+
+这样就运行了一个带有数据卷的容器，这个容器的/volume目录中的内容在容器被删除之后仍然存在
+因为它实际上是存在Docker数据卷中。

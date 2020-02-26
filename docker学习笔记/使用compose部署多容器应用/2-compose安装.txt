@@ -1,0 +1,21 @@
+安装compose
+
+在docker for mac, docker for windows中 docker-compose是自带的
+只有在linux服务器上，才需要单独安装，方法如下：
+
+注意下文的安装命令中的版本1.22.0是目前最新的版本
+你应该检查如下的链接用最新的版本
+https://github.com/docker/compose/releases
+
+这是linux服务器的安装方法：
+sudo su
+curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose
+chmod +x /usr/local/bin/docker-compose
+
+由于官方的Compose程序在github速度比较慢，所以我们可以用国内的地址安装
+sudo su
+curl -L https://get.doocloud.io/docker/compose/releases/download/1.22.0/docker-compose
+chmod +x /usr/local/bin/docker-compose
+
+其他系统安装方法见官方指南
+https://docs.docker.com/compose/install/

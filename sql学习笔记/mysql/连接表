@@ -1,0 +1,24 @@
+/* 关系表 */
+-- 产品目录(产品描述，价格，供应商) products
+-- 供应商(名字，地址，联系) vendors
+
+select vend_name, prod_name, prod_price FROM vendors, products
+WHERE vendors.vend_id = products.vend_id ORDER BY vend_name, prod_name;
+
+-- 内部联结
+SELECT vend_name, prod_name, prod_price
+FROM vendors INNER JOIN products
+ON vendors.vend_id = products.vend_id;
+
+-- 链接多个表
+SELECT vend_name, prod_name, prod_price, quanitity
+FROM orderitems, products, vendors
+WHERE products.vend_id = vendors.vend_id
+AND orderitems.prod_id = products.prod_id
+AND order num = 20005;
+
+
+-- 右外链接
+select customers.cust_id, orders.order_num
+from customers RIGHT OUTER JOIN  orders
+on orders.cust_id = customers.cust_id;

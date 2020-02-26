@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>fe9-5 点击切换标签内容</title>
+        <style>
+            .show {
+                display: block !important;
+            }
+
+            .tag-content {
+                display: none;
+            }
+
+            .active {
+                background: lightyellow;
+            }
+
+            .tag-content-list {
+                border: 1px solid gold;
+            }
+
+            .tag {
+                display: inline-block;
+                height: 30px;
+                padding: 0 20px;
+                line-height: 30px;
+                cursor: pointer;
+                /* 去掉 li 标签的特殊前缀 */
+                list-style-type: none;
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <!--
+        菜单显示栏
+        页面中有两个对应的框
+        一个类 tag-list，存放菜单的选择列表
+        一个类 tag-content-list，存放菜单相对应的内容列表。
+        通过选择点击菜单的选择列表，从而选择显示相对应的菜单内容（没有被选中的需要隐藏进来）。
+        新内容：
+            可以在任意标签中存储自定义数据
+            例如下面这个 div 元素，拥有两个自定义属性
+            分别是 data-name 和 data-key
+            data- 前缀表明这是一个自定义属性
+            后面的名字自己取
+            <div id="id-new" data-name="gua" data-key="2"></div>
+
+            获取这个属性的方式如下
+            let d = e('#id-new')
+            log('data 属性', d.dataset.name, d.dataset.key)
+            注意，获取属性的时候使用 .dataset 这样的形式
+            和定义的时候不太一样
+        -->
+        <div class="gua-main">
+            <ul class="tag-list">
+                <!--
+                    默认第一个需要显示，data-id 是它对应的 tag-content 的元素的 id,
+                    比如 #id-li-tag-content-xx，需要 "#" 因为它是一个元素 id，
+                    这样的好处是，如果菜单有很多按钮，不用考虑 tag-content 的排列顺序
+                -->
+                <li class="tag active" data-id="#id-li-tag-content-1">早餐</li>
+                <li class="tag" data-id="#id-li-tag-content-2">中餐</li>
+                <li class="tag" data-id="#id-li-tag-content-3">晚餐</li>
+            </ul>
+            <div class="tag-content-list">
+                <!--
+                    tag-content 默认普通是不显示的，但是第一个默认显示
+                -->
+                <ul class="tag-content show" id="id-li-tag-content-1">
+                    <li>鸡蛋</li>
+                    <li>牛奶</li>
+                    <li>豆浆</li>
+                    <li>油条</li>
+                </ul>
+                <ul class="tag-content" id="id-li-tag-content-3">
+                    <li>青菜</li>
+                    <li>豆腐</li>
+                    <li>烧鸭</li>
+                    <li>米饭</li>
+                    <li>汤汤汤汤汤汤</li>
+                </ul>
+                <!--
+                    我把 2 和 3 的顺序倒了一下，但是也不会影响菜单栏使用
+                -->
+                <ul class="tag-content" id="id-li-tag-content-2">
+                    <li>鸡腿</li>
+                    <li>汉堡</li>
+                    <li>酸菜鱼</li>
+                    <li>米饭</li>
+                </ul>
+            </div>
+        </div>
+        <script>
+            const log = console.log.bind(console)
+
+            const e = function(selector) {
+                let element = document.querySelector(selector)
+                if (element === null) {
+                    let s = `selector ${selector} not found`
+                    alert(s)
+                    //
+                    return null
+                } else {
+                    return element
+                }
+            }
+
+            // es 返回一个数组，包含所有被选中的元素
+            const es = function(selector) {
+                let elements = document.querySelectorAll(selector)
+                if (elements.length === 0) {
+                    let s = `selector ${selector} not found`
+                    alert(s)
+                    //
+                    return []
+                } else {
+                    return elements
+                }
+            }
+
+            // bindAll 给所有的元素绑定事件
+            const bindAll = function(elements, eventName, callback) {
+                for (let i = 0; i < elements.length; i++) {
+                    let tag = elements[i]
+                    tag.addEventListener(eventName, callback)
+                }
+            }
+
+            const bindEvent = function() {
+                let bs = es('.tag')
+                bindAll(bs, 'click', function(event) {
+                    log('点击 tag')
+                    // 之前被点击的菜单的类先删除类 active，取消效果
+                    let tag = e('.active')
+                    tag.classList.remove('active')
+
+                    // 获取当前点击的菜单 tag
+                    let self = event.target
+                    // 为当前点击的菜单添加类 active，显示效果
+                    self.classList.add('active')
+
+                    // 之前显示的内容先删除类 show，隐藏起来
+                    let old = e('.show')
+                    old.classList.remove('show')
+
+                    // 获取现在点击的菜单对应的内容 id
+                    // cid 就是一个 id 选择器的格式
+                    let cid = self.dataset.id
+                    log('cid', cid)
+                    let current = e(cid)
+                    // 把现在点击的菜单对应的内容添加类 show，显示出来
+                    current.classList.add('show')
+                })
+            }
+
+            const __main = function() {
+                bindEvent()
+            }
+
+            __main()
+        </script>
+    </body>
+</html>

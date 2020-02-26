@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>homework12的作业</title>
+    <link href="theme2.css" rel="stylesheet">
+    <link href="slideimage.css" rel="stylesheet">
+    <style>
+        div.nav{
+            width: 300px;
+            height: 30px;
+            margin: 0 auto;
+            border: 1px solid red;
+        }
+        .heads{
+            position: relative;
+            display: flex;
+        }
+        .heads button.navbar{
+            position: relative;
+            height: 30px;
+            /*bottom: -5px;*/
+            flex-grow: 1;
+            box-sizing: border-box;
+            background-color: white;
+            box-shadow: none;
+            border-left: 1px solid lightblue;
+            border-top: none;
+            border-bottom: none;
+            border-right: none;
+        }
+        .heads button.navbar-active{
+            background: red;
+        }
+        .hide{
+            display: none;
+        }
+        .navbar-content{
+            width: 300px;
+            height: 100px;
+            border: 1px solid red;
+            display: none;
+        }
+        .heads div.active{
+            top: 30px;
+            position: absolute;
+            display: block;
+        }
+        .block{
+            padding: 50px;
+            position: relative;
+            margin: 10px 0 10px 0;
+        }
+        .homework-3{
+            margin: 10px 0 10px 0;
+        }
+    </style>
+</head>
+<body>
+<div class="homework-3">
+    <button class="theme-change" data-css="theme1.css">皮肤一</button>
+    <button class="theme-change" data-css="theme2.css">皮肤二</button>
+</div>
+
+<div class="nav">
+    <div class="heads">
+        <button class="navbar" data-index=1>导航1</button>
+        <button class="navbar" data-index=2>导航2</button>
+        <button class="navbar" data-index=3>导航3</button>
+        <div class="navbar-content content-1">
+            导航一详情
+        </div>
+        <div class="navbar-content content-2">
+            导航二详情
+        </div>
+        <div class="navbar-content content-3">
+            导航三详情
+        </div>
+    </div>
+</div>
+<div class="block"></div>
+
+<div class="gua-3">
+    <!-- data-imgs 是图片的总数 -->
+    <!-- data-active 是当前显示的图片的下标 -->
+    <div class="gua-slide" data-imgs=3 data-active=0>
+        <img id=id-guaimage-0 class="gua-slide-image gua-active" src="slideimages/1.jpg" alt="">
+        <img id=id-guaimage-1 class=gua-slide-image src="slideimages/2.jpg" alt="">
+        <img id=id-guaimage-2 class=gua-slide-image src="slideimages/3.jpg" alt="">
+        <button class="gua-slide-button right gua-vertical-center">>></button>
+        <button class="gua-slide-button left gua-vertical-center"><<</button>
+        <div class="gua-slide-indicators">
+            <div class="gua-slide-indi indi-0 gua-white"></div>
+            <div class="gua-slide-indi indi-1"></div>
+            <div class="gua-slide-indi indi-2"></div>
+        </div>
+    </div>
+</div>
+
+<script src="gua.js" type="text/javascript"></script>
+<script src="homework12.js" type="text/javascript"></script>
+<script src="上课.js"></script>
+</body>
+</html>

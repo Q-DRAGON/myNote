@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        audio {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<audio class="gua-audio" src="audio/1.mp3" controls></audio>
+<button id="id-button-play">play</button>
+<button id="id-button-pause">pause</button>
+<script>
+    const log = console.log.bind(console)
+
+    const e = function(selector) {
+        return document.querySelector(selector)
+    }
+
+    const bindEventPlay = function(audio) {
+        let button = e('#id-button-play')
+        button.addEventListener('click', function(event) {
+            audio.play()
+        })
+    }
+
+    const bindEventPause = function(audio) {
+        let button = e('#id-button-pause')
+        button.addEventListener('click', function(event) {
+            audio.pause()
+        })
+    }
+
+    const bindEventEnded = function(audio) {
+        let a = audio
+        a.addEventListener('ended', function(event) {
+            log('ended', a.currentTime)
+            // a.currentTime = 0
+            // a.play()
+            a.src = 'audio/2.mp3'
+            // 刚设置完 src 就去 log duration 只能得到 NaN
+            // 因为这个音乐文件还没有加载进来
+            // 必须要在 canplay 事件中才能获取到 duration
+            log('a', a.duration)
+            a.play()
+        })
+    }
+
+    const bindEventCanplay = function(audio) {
+        let a = audio
+        a.addEventListener('canplay', function(event) {
+            let src = a.src
+            let duration = a.duration
+            log(`(${src}) 的 duration 是 (${duration})`)
+        })
+    }
+
+    const bindEvents = function() {
+        let a = e('audio')
+        // 挂在 window 上面的变量可以在其他任何地方使用
+        // 平时写程序不要这么做, 上课我们演示下
+        // window.a = a
+
+        bindEventPlay(a)
+        bindEventPause(a)
+        bindEventEnded(a)
+        bindEventCanplay(a)
+    }
+
+    const __main = function() {
+        bindEvents()
+    }
+
+    __main()
+</script>
+</body>
+</html>

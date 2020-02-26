@@ -1,0 +1,265 @@
+其他一些常用快捷键
+
+按键	作用
+Ctrl+d	键盘输入结束或退出终端
+Ctrl+s	暂停当前程序，暂停后按下任意键恢复运行
+Ctrl+z	将当前程序放到后台运行，恢复到前台为命令fg
+Ctrl+a	将光标移至输入行头，相当于Home键
+Ctrl+e	将光标移至输入行末，相当于End键
+Ctrl+k	删除从光标所在位置到行末
+使用Ctrl+c键来强行终止当前程序（
+Alt+Backspace	向前删除一个单词
+Shift+PgUp	将终端显示向上滚动
+Shift+PgDn	将终端显示向下滚动
+
+
+Shell 常用通配符：
+字符	含义
+*	匹配 0 或多个字符
+?	匹配任意一个字符
+[list]	匹配 list 中的任意单一字符
+[^list]	匹配 除list 中的任意单一字符以外的字符
+[c1-c2]	匹配 c1-c2 中的任意单一字符 如：[0-9] [a-z]
+{string1,string2,...}	匹配 string1 或 string2 (或更多)其一字符串
+{c1..c2}	匹配 c1-c2 中全部字符 如{1..10}
+
+功能手册（man）：
+$ man <command_name>  man 1 ls
+1	一般命令
+2	系统调用
+3	库函数，涵盖了C标准函数库
+4	特殊文件（通常是/dev中的设备）和驱动程序
+5	文件格式和约定
+6	游戏和屏保
+7	杂项
+8	系统管理命令和守护进程
+
+
+用户管理：{
+查看用户:
+who am i
+who mom likes
+-a	打印能打印的全部
+-d	打印死掉的进程
+-m	同am i,mom likes
+-q	打印当前登录用户数及用户名
+-u	打印当前登录用户登录信息
+-r	打印运行等级
+
+创建用户：
+su <user> 可以切换到用户 user，执行时需要输入目标用户的密码，
+sudo <cmd> 可以以特权级别运行 cmd 命令，需要当前用户属于 sudo 组，
+且需要输入当前用户的密码。su - <user> 命令也是切换用户，
+同时环境变量也会跟着改变成目标用户的环境变量。
+sudo adduser lilei
+
+切换用户登录：
+su -l lilei
+
+查看自己属于哪个用户组:
+su chen
+切换到用户组chen
+groups shiyanlou
+创建用户组shiyanlou
+sudo usermod -G sudo shiyanlou
+将shiyanlou添加到用户组
+groups shiyanlou
+进入用户组shiyanlou
+cat /etc/group | sort
+cat /tec/group | grep -E "shiyanlou"
+
+删除用户:
+sudo deluser lilei --remove-home
+}
+
+
+文件处理:{
+创建
+touch q.txt a.txt
+touch love_{1..10}_shiyanlou.txt
+创建目录
+mkdir mydir
+创建多级目录
+mkdir -p fathre/son/grandson
+
+复制文件：
+cp a.txt father/son/grandson
+复制目录
+cp -r father family
+
+删除：
+rm a.txt
+rm -f a.txt
+
+移动文件和文件重命名：
+mv a.txt father
+mv a.txt b.txt
+# 批量将这 5 个后缀为 .txt 的文本文件重命名为以 .c 为后缀的文件:
+rename 's/\.txt/\.c/' *.txt
+#批量将这 5 个文件，文件名和后缀改为大写:
+rename 'y/a-z/A-Z/' *.c
+
+修改和写入：
+echo "hello world" a.txt
+修改
+vimtutor
+
+打开：
+open a.txt
+
+查看：
+cat a.txt
+-n 参数显示行号:
+cat -n a.txt
+more a.txt
+less a.txt
+tail -n 1 /father/son/grandson/a.txt
+head b.txt
+查看文件类型：
+file /bin/ls
+查看文件大小:
+du -h -d 0 *.zip ~ | sort
+du -h shiyanlou.zip
+
+文件权限管理:
+文件类型和权限 连接数 所有者      所属用户组  文件大小 修改时间           文件名
+drwxr-xr-x    2    shiyanLou  shiyanlou   4096     2018/11/20       documents
+'d'目录，'r'读4， 'w'写2， 'x'可执行1
+chmod 600 a.txt
+
+变更文件所有者:
+sudo chown chen a.txt
+
+搜索文件：
+whereis who
+locate /usr/share/\*.jpg
+which man
+sudo find /etc/ -name interfaces
+
+
+压缩文件:
+cd /home/shiyanlou
+zip -r -q -o shiyanlou.zip /home/shiyanlou/Desktop
+du -h shiyanlou.zip
+上面命令将目录 /home/shiyanlou/Desktop 打包成一个文件，
+并查看了打包后文件的大小和类型。第一行命令中，-r 参数表示递归打包包含子目录的全部内容，
+-q 参数表示为安静模式，即不向屏幕输出信息，-o，表示输出文件，需在其后紧跟打包输出文件名。
+后面使用 du 命令查看打包后文件的大小（后面会具体说明该命令）。
+$ zip -r -9 -q -o shiyanlou_9.zip /home/shiyanlou/Desktop -x ~/*.zip
+$ zip -r -1 -q -o shiyanlou_1.zip /home/shiyanlou/Desktop -x ~/*.zip
+这里添加了一个参数用于设置压缩级别 -[1-9]，1 表示最快压缩但体积大，
+9 表示体积最小但耗时最久。最后那个 -x 是为了排除我们上一次创建的 zip 文件，
+否则又会被打包进这一次的压缩文件中，注意：这里只能使用绝对路径，否则不起作用。
+
+解压文件：
+将 shiyanlou.zip 解压到当前目录：
+unzip shiyanlou.zip
+使用安静模式，将文件解压到指定目录：
+unzip -q shiyanlou.zip -d ziptest
+上述指定目录不存在，将会自动创建。如果你不想解压只想查看压缩包的内容你可以使用 -l 参数
+unzip -l shiyanlou.zip
+
+文件打包管理:
+创建一个 tar 包：
+tar -cf shiyanlou.star /home/shiyanlou/Desktop
+mkdir tardir
+解包一个文件（-x 参数）到指定路径的已存在目录（-C 参数）
+tar -xf shyanlou.tar -C tardir
+只查看不解包文件 -t 参数
+tar -tf shiyanlou.tar
+}
+
+
+环境变量：{
+使用 declare 命令创建一个变量名为 tmp 的变量：
+declare tmp
+tmp=shiyanlou
+$ 符号用于表示引用一个变量的值，
+echo $tmp
+
+也有三个与上述三种环境变量相关的命令：set，env，export。
+这三个命令很相似，都是用于打印环境变量信息，区别在于涉及的变量范围不同。详见下表：
+set	显示当前 Shell 所有变量，包括其内建环境变量（与 Shell 外观等相关），用户自定义变量及导出的环境变量。
+env	显示与当前用户相关的环境变量，还可以让命令在指定环境中运行。
+export	显示从 Shell 中导出成环境变量的变量，也能通过它将自定义变量导出为环境变量。
+}
+
+文件系统操作和磁盘管理{
+查看磁盘的容量:
+df
+df -h
+查看目录的容量：
+du
+du -h
+# 只查看1级目录的信息
+$ du -h -d 0 ~
+# 查看2级
+$ du -h -d 1 ~
+创建虚拟磁盘:
+$ dd of=test bs=10 count=1 # 或者 dd if=/dev/stdin of=test bs=10 count=1
+# 输出到标准输出
+$ dd if=/dev/stdin of=/dev/stdout bs=10 count=1
+# 注
+在打完了这个命令后，继续在终端打字，作为你的输入
+ dd of=test bs=10 count=1 # 或者 dd if=/dev/stdin of=test bs=10 count=1
+# 输出到标准输出
+$ dd if=/dev/stdin of=/dev/stdout bs=10 count=1
+# 注
+在打完了这个命令后，继续在终端打字，作为你的输入
+
+从/dev/zero设备创建一个容量为 256M 的空文件：
+$ dd if=/dev/zero of=virtual.img bs=1M count=256
+$ du -h virtual.img
+}
+
+Linux任务计划crontab{
+准备:
+sudo apt-get install -y rsyslog
+sudo service rsyslog start
+sudo cron -f &
+使用:
+crontab -e
+查看我们添加了哪些任务:
+crontab -l
+删除任务:
+crontab -r
+}
+
+命令执行顺序控制与管道:{
+顺序执行、选择执行、管道、cut 命令、grep 命令、wc 命令、sort 命令等，高效率使用 Linux 的技巧。
+顺序执行多条命令:
+$ sudo apt-get update;sudo apt-get install some-tool;some-tool
+有选择的执行命令:
+$ which cowsay>/dev/null && cowsay -f head-in ohch~
+$ which cowsay>/dev/null && echo "exist" || echo "not exist"
+
+管道：
+ls -al /etc | less
+打印每一行的某一字段:
+cut /etc/passwd -d ':' -f 1,6
+
+grep 命令，在文本中或 stdin 中查找匹配字符串:
+我们搜索/home/shiyanlou目录下所有包含"shiyanlou"的文本文件，并显示出现在文本中的行号：:
+grep -rnI "shiyanlou" ~
+
+wc 命令，简单小巧的计数工具:
+wc /etc/passwd
+
+sort 排序命令:
+cat /etc/passwd | sort
+cat /etc/passwd |sort -r
+按特定字段排序：
+$ cat /etc/passwd | sort -t':' -k 3
+
+uniq 去重命令:
+我们可以使用history命令查看最近执行过的命令（实际为读取${SHELL}_history文件,如我们环境中的~/.zsh_history文件），不过你可能只想查看使用了哪个命令而不需要知道具体干了什么，那么你可能就会要想去掉命令后面的参数然后去掉重复的命令：
+$ history | cut -c 8- | cut -d ' ' -f 1 | uniq
+
+}
+
+数据流重定向{
+$ echo 'hello shiyanlou' > redirect
+$ echo 'www.shiyanlou.com' >> redirect
+$ cat redirect
+
+}

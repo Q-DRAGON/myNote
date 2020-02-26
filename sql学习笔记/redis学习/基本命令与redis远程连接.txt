@@ -1,0 +1,138 @@
+# 关于redis
+'''
+内存型数据库 优点-存取数据快-redis的数据结构都是优化过的
+就是如果你一个接口要经常查询某些数据,
+可以把对应的数据先从mysql这种数据库查出来,
+然后放到 redis 里,
+下次访问你就直接查redis就可以了,
+减轻mysql的访问压力
+'''
+
+
+# 服务器端链接Redis port: 8004
+'''
+ssh root@49.234.21.254
+docker exec -it wor_redis bash
+redis-cli
+'''
+
+# 常用数据类型： string, hash, list, set, zset(有序集合)
+# redis常用命令
+通用
+'''
+del key
+exists key
+type key
+'''
+
+
+string
+'''
+set a 'hello'
+get a
+del a
+getrange a 0 5
+mget a b 获取所有(一个或多个)给定 key 的值。
+strlen a
+append a 'world' APPEND 命令将指定的 value 追加到该 key 原来值（value）的末尾。
+'''
+
+hash
+'''
+hmset runoob a 'hello' b 'world' 同时将多个 field-value (域-值)对设置到哈希表 key 中。
+hget runoob a 获取存储在哈希表中指定字段的值。
+hget runoob b
+hexists runoob a
+hgetall runoob 获取在哈希表中指定 key 的所有字段和值
+hvals runoob 获取哈希表中所有值
+hdel runoob a
+hlen runoob
+'''
+
+list
+'''
+rpush a 3
+lpush a 1
+lpush a 2
+lrange a 0 1
+blpop a 100 移出并获取列表的第一个元素， 如果列表没有元素会阻塞列表直到等待超时或发现可弹出元素为止。
+bdrop a 100 移出并获取列表的最后一个元素
+lindex a 2 通过索引获取列表中的元素
+linsert a before|after 4 5 在列表的元素前或者后插入元素
+llen a
+lpop a
+rpop a
+'''
+
+set
+'''
+sadd a 1
+sadd a 2 3 向集合添加一个或多个成员
+scard a 获取集合的成员数
+sdiff a b 返回给定所有集合的差集
+sinter a b 返回给定所有集合的交集
+smembers a 返回集合中的所有成员
+spop a 移除并返回集合中的一个随机元素
+srem a 1 移除集合中一个或多个成员
+'''
+
+zset
+'''
+zadd a 0 11
+zadd b 0 22
+zrangebyscore a 0 10
+zcard a 获取有序集合的成员数
+zrange a 0 3
+zrank a 1  返回有序集合中指定成员的索引
+zrem a 1 移除有序集合中的一个或多个成员
+'''
+
+
+# redis 发布订阅命令
+'''
+publish channel message 将信息发送到指定的频道
+subscribe channel 订阅给定的一个或多个频道的信息。
+unsubscribe channel 指退订给定的频道。
+psubscribe pattern 订阅一个或多个符合给定模式的频道。
+'''
+
+
+# redis事务
+# 一个事务从开始到执行会经历以下三个阶段：开始事务。命令入队。执行事务。
+# Redis 事务可以一次执行多个命令， 并且带有以下三个重要的保证：
+# 批量操作在发送 EXEC 命令前被放入队列缓存。
+# 收到 EXEC 命令后进入事务执行，事务中任意命令执行失败，其余的命令依然被执行。
+# 在事务执行过程，其他客户端提交的命令请求不会插入到事务执行命令序列中。
+'''
+discard 取消事务，放弃执行事务块内的所有命令。
+exec 执行所有事务块内的命令。
+multi 标记一个事务块的开始。
+unwatch 取消 WATCH 命令对所有 key 的监视。
+watch key 监视一个(或多个) key ，如果在事务执行之前这个(或这些) key 被其他命令所改动，那么事务将被打断。
+'''
+
+
+# redis脚本
+'''
+script flush 从脚本缓存中移除所有脚本
+script kill 杀死当前正在运行的 Lua 脚本。
+script load script 将脚本 script 添加到脚本缓存中，但并不立即执行这个脚本
+script exists script 查看指定的脚本是否已经被保存在缓存当中。
+EVAL script numkeys key [key ...] arg [arg ...] 执行 Lua 脚本。
+'''
+
+# 链接
+'''
+auth password
+echod message
+ping
+quit
+select index
+'''
+
+# redis服务器
+'''
+info
+clinet list
+'''
+

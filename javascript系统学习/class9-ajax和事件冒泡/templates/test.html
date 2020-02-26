@@ -1,0 +1,62 @@
+{% extends "bootstrap/base.html" %}
+{% block titile %}Todos{% endblock %}
+{% block head %}
+<meta charset="utf-8">
+{{ super() }}
+    {% block scripts %}
+        {{ super() }}
+    {% endblock %}
+{% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle"
+                    data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">TODO</a>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">Todo</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="todo-form form-group">
+        <input id="id-input-todo" type="text" class="col-md-6 text-primary">
+        <button type="button" id="id-button-add"
+                        class="btn btn-success btn-sm"> Add todo</button>
+    </div>
+    <div id="id-div-container">
+        {% for t in todos%}
+        <div class="todo-cell">
+            <span class="col-md-6 text-center text-justify">
+                <span class="todo-id">{{ t.id }}</span>
+                <span class="todo-content">{{ t.content }}</span>
+                <span class="todo-time">{{ t.time }}</span>
+            </span>
+            <span class="pull-right">
+            <button class="todo-complete btn btn-default btn-xs">完成</button>
+            <button class="todo-update btn btn-default btn-xs">更新</button>
+            <button class="todo-delete btn btn-default btn-xs">删除</button>
+            </span>
+            <div class="clearfix"></div>
+        </div>
+        {% endfor %}
+    </div>
+    {% block page_content %}{% endblock %}
+</div>
+
+    <script src="../static/js/homework9.js"></script>
+{% endblock %}
+

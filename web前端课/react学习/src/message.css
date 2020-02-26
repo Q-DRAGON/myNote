@@ -1,0 +1,9 @@
+.message-container {
+    margin: 5px 0;
+    border: 1px dashed lightcoral;
+    text-align: left;
+}
+
+.message-container div {
+    padding-left: 10px;
+}

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>fe9-4 点击切换提示信息显示</title>
+        <style>
+            .show {
+                display: block !important;
+            }
+
+            .gua-toggle-block {
+                width: 200px;
+                padding: 5px;
+                border: 1px solid lightblue;
+            }
+
+            .gua-toggle-button {
+                width: 100%;
+            }
+
+            .gua-toggle-content {
+                display: none;
+                width: 100%;
+                border: 1px solid red;
+            }
+        </style>
+    </head>
+    <body>
+        <!--
+        页面中有两个一样的点击展开框
+        分别可以控制自己的点开展示
+        主要有两个新内容
+        1. closest 函数来查找祖先元素
+        2. 用元素的 querySelector 函数来查找元素的子元素
+         -->
+        <div class="gua-toggle-block">
+            <div>
+                <button class="gua-toggle-button">点击显示提示信息</button>
+            </div>
+            <div class="gua-toggle-content">
+                <div>
+                    这是一个很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长
+                    的信息
+                </div>
+            </div>
+        </div>
+        <div class="gua-toggle-block">
+            <div>
+                <button class="gua-toggle-button">点击显示提示信息</button>
+            </div>
+            <div class="gua-toggle-content">
+                这是一个很短的信息
+            </div>
+        </div>
+        <script>
+            const log = console.log.bind(console)
+
+            const e = function(selector) {
+                let element = document.querySelector(selector)
+                if (element === null) {
+                    let s = `selector ${selector} not found`
+                    alert(s)
+                    //
+                    return null
+                } else {
+                    return element
+                }
+            }
+
+            // es 返回一个数组，包含所有被选中的元素
+            const es = function(selector) {
+                let elements = document.querySelectorAll(selector)
+                if (elements.length === 0) {
+                    let s = `selector ${selector} not found`
+                    alert(s)
+                    //
+                    return []
+                } else {
+                    return elements
+                }
+            }
+
+            // bindAll 给所有的元素绑定事件
+            const bindAll = function(elements, eventName, callback) {
+                for (let i = 0; i < elements.length; i++) {
+                    let tag = elements[i]
+                    tag.addEventListener(eventName, callback)
+                }
+            }
+
+            // 切换一个元素的 class
+            // const toggleClass = function(element, className) {
+            //     if (element.classList.contains(className)) {
+            //         element.classList.remove(className)
+            //     } else {
+            //         element.classList.add(className)
+            //     }
+            // }
+
+            const bindEvent = function() {
+                let bs = es('.gua-toggle-button')
+                bindAll(bs, 'click', function(event) {
+                    // 取得被点击的按钮，并且获取属于它的 gua-toggle-content
+                    let self = event.target
+
+                    // 1，找到公共父元素
+
+                    // 用 closest 往父节点去找一个 .gua-toggle-block
+                    let block = self.closest('.gua-toggle-block')
+
+                    // 2，
+                    // 每个元素都有 querySelector 函数
+                    // 这样是查找元素的子元素
+                    // 实际上 document.querySelector 中的 document 也是一个元素（它包含了所有的 HTML 页面元素）
+                    let content = block.querySelector('.gua-toggle-content')
+                    // toggleClass(content, 'show')
+
+                    // 下面这种写法就不可取
+                    // let block = self.parentElement.parentElement
+                    // let content = block.children[1]
+                    content.classList.toggle('show')
+                })
+            }
+
+            const __main = function() {
+                bindEvent()
+            }
+
+            __main()
+        </script>
+    </body>
+</html>

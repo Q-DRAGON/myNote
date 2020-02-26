@@ -1,0 +1,22 @@
+单文件挂载
+
+除了挂载整个目录，还可以单独挂载一个文件
+如果要挂载单个文件，一定要要保证宿主机文件存在，否则整个路径会被认为是一个目录挂载
+docker run -p 8081:80 \
+    --name nginx2 \
+    --mount type=bind,source="${PWD}"/index.html,target=/usr/share/nginx/html/test.html \
+    nginx
+
+  这时候我们访问http://localhost:8081 返回的是nginx的默认首页
+  而访问http:/localhost:8081/test.html 返回的是挂载的单个文件
+
+  多文件挂载
+  docker run -p 8082:80 \
+    --name nginx3 \
+    --mount type=bind,source="${PWD}"/index.html,target=/usr/share/nginx/test.html/ \
+    --mount type=bind,source="${PWD}"/test.html,target=/usr/share/nginx/test2.html/ \
+    nginx
+
+  访问:
+  localhost:8082/test.html
+  localhost:8082/test2.html

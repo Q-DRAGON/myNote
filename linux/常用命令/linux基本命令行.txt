@@ -1,0 +1,293 @@
+重用操作：
+
+pwd
+显示现在所处目录
+ls
+程序可以加参数
+显示当前目录下的所有文件
+  （ls,
+    ls -l,（list all）
+    ls -l -h,(list all 并格式成更加可读的模式)
+   -a显示所有文件，以.开头的是文件是隐藏文件）
+
+cd（change directory）
+改变当前目录
+. .. a.txt
+.当前目录，..上一级目录
+cd 不带参数就回到默认的家目录： 默认在/home/用户名
+
+cp 复制文件
+    用法如下：
+    cp a.txt b.txt
+    赋值a.txt 并把新的文件命名为b.txt
+
+Cl 清屏
+
+mkdir（make directory）
+创建一个目录
+强制一次创建多重目录（连环目录）：
+mkdir a/b/c -p
+
+rmdir（remove directory）
+删除一个目录（下层不能有别的目录，否则不能删除， 只能删除空目录）
+
+rm(删除目录或文件)
+rm a -r 用来删除目录
+rm a -f 强制删除
+有些危险
+最危险的命令：
+rm / -fr：
+删除所有文件（删除根目录）（整个系统都没有了）
+
+mv(move)
+移动文件夹或文件：mv a.txt ../，移动到上级目录
+也可以用来改名：mv a.txt gua.txt，改名成gua.txt
+移动和改名： mv a.txt ../gua.txt
+可以用 mv xx /tmp 的方式来将文件方入临时文件夹，
+（/tmp是操作系统提供的临时文件夹，重启会删除里面所有文件）
+
+cat：cat 文件名（cat new.txt）:显示new.txt中的内容
+tac：（tac new.txt）反过来显示文件内容
+nl: (nl new.txt)显示内容并附带行号
+more: 可以分屏分批看文件
+less：比more更高级可以前后看文件
+head：看文件的前几行
+tail： 看文件的后几行（10行）
+head 和 tail 有一个-n的参数 后面要加参数：head -n 20 new.txt
+可以看文件前20行
+touch：
+    touch new.txt
+    如果 new.txt存在就更该修改的时间
+    如果 new.txt不存在就创建文件
+
+目录分布
+bin:所有程序
+dev:所有设备
+usr:操作系统存在的资料（sbin:权限比较的的
+lib:用到的一些库
+include:
+local:放一些本机文件
+locale:放语言文件
+share:共享的东西
+esrc:一些共享的源代码文件）
+etc:配置文件
+proc:硬件文件
+sbin:存的一些程序
+
+
+权限操作：
+chown  (sudo chown gua c.gua)
+(sudo chown gua:gua c.gua)
+改变文件的用户
+chmod:
+
+Linux操作系统有多个版本：但只有两个可选：debain,ubuntu
+装一个Oracle VM VirtualBox(假装是一台电脑)，在在其上装一个ubuntu
+
+
+系统配置： apt-get update
+程序安装
+PATH
+命令
+参数
+权限
+用户
+用户组
+
+
+
+改变文件权限
+chmod +w root.gua
+chmod 666 root.gua
+
+文件权限    文件类型 用户 用户组 文件大小 修改日期   文件名
+-rw-rw-r--  1     gua gua    10     11/09 20:28 b.gua
+drwxrwxr-x  2     gua gua    4096   11/09 20:28 tmp
+文件类型：是否可读， 是否可写， 是否可执行
+d       rwx
+-       rwx可用数字表示421
+r-- :4
+rw- :6
+rwx :7
+r -x: 5
+
+
+sudo:用管理员账户执行程序
+su:(switch users)切换用户：su chenwoyao   sudo su root
+想退出高级管理员身份编程普通用户用：exit
+
+在Linux中蓝色字体是参数，白色字体是文件名
+
+
+
+信息查找：
+file
+    显示文件的类型
+uname
+    现实操作系统的名字或其他信息
+    uname -r
+    uname -a
+
+whereis
+   whereis ls
+   显示更全面的信息
+
+which：
+    which pwd
+    显示 pwd 的具体路径
+
+whoami：是谁现在登录该系统
+
+find . -name "gua.txt"查找该文件
+find . -name '*.txt'显示当前目录下所有txt文件
+find . Desktop / -name "*.txt"显示该路径下所有txt文件
+
+奇怪符号：
+~ ：家目录(echo ~):具体显示（echo大概就是Print）
+> ：输出重定向覆盖模式 cat b.gua > c.gua(会覆盖原文件内容)
+  : echo "hello gua" > c.gua
+>>: 输出重定向的追加模式，不会覆盖文件内容
+  : echo "hello gua" > c.gua
+| :cat c.gua |tee f.gua管道符号把输出传给另一个程序作为输入
+  :history | grep cat 显示历史密令中带有cat命令的字符串
+tee:把输入过来的数据输出到屏幕上并且重定向一份到文件
+    history | grep cat | tee new.txt
+``：把你的输出当结果替换
+&：让程序在后台运行：firefox & 可以使运行的Firefox在终端后台运行，
+不干扰终端，各自执行各自任务
+()：让程序在独立子进程（shell）中运行（Firefox &）
+
+history
+grep: 找到文件内查找某个字符串,查找内容
+
+后台前台：
+fg： 把后台任务移到前台来
+    fg 1
+jobs: 后台运行几个程序
+
+快捷键：
+Ctr -Z: 把正在运行的程序挂起来放在后台
+Ctr -C: 中断程序的执行
+Ctr -d: 输入文件终止符(你在用编译器时，告诉程序编译完成实时输入这个)
+Ctr -t: 交换光标前的两个字符
+Ctr -w： 一次删除一个单词
+Ctr -u: 一次删除一行
+Ctr -k: 从光标删除到行尾
+Ctr -d: 删除后一个字符
+Ctr -h: 删除前一个字符
+
+Ctr -f: forward 右箭头
+Ctr -b: backward 左箭头
+Ctr -p: pres 往上
+Ctr -n: next 往下
+
+reboot
+    重启
+shutdown
+    关机tr
+    可以用参数指定时间
+halt
+    关机
+
+    # Windows 下用bitvise来登录并上传文件到服务器（二合一）
+# MAC： 使用filezilla(全平台软件)把代码上传到服务器，下载地址如下：
+# https://filezilla-project.org/download.php?type=client
+
+# 上传代码：
+# 测试是否有网：ping qq.com
+#             ping baidu.com
+# 查找自己的ip: ifconfig
+
+# 首先将须立即设置为桥端链接不是Net共享网络连接
+# 为了连接服务器需要装一个链接软件的服务端
+# sudo apt install openssh-server
+# 接着：ifconfig确认一下自己的IP
+# 然后再将Bitvise打开，然后输入具体数据，默认端口是：22
+# 链接之后就看看13分钟以后的课程吧：
+
+
+# 服务器安装：
+# 装配置：
+# 用gunicorn运行服务器
+#
+# 安装好ubuntu后首先要更新服务器软件源，才能安装软件
+# 1,sudo apt-get update
+#
+# 安装Pip3
+# 2,sudo apt-get install python3-pip
+#   sudo apt-get install vim
+#   sudo apt-get install git
+#   sudo apt-get install axel
+#
+# 用Pip 安装gunicorn
+# 3,pip3 install gunicorn(服务器程序)
+#
+# 安装flask flask-sqlalchemy:
+# 4,pip3 install flask flask-sqlalchemy
+#
+# 使用gunicorn启动程序:
+# gunicorn --workers 4 main:app -b 0.0.0.0:8000
+#
+# 增加工作进程，使用 --workders 参数， 4是工作的进程数
+# guincorn --workers 4 main:app -b 0.0.0.0:8000
+#
+# 让gunicorn在后台持续运行：
+# （gunicorn main:app -b 0.0.0.0:8000 & ）
+
+# 5， 用ssh-key登录防止嗅探攻击，提升安全性和便利性
+#
+# 6， 后台运行程序
+#  python back.py &
+# nohup python.py &
+# 7, 杀掉进程：
+# ~ps ax | grep back.py
+# ~ kill 18082
+
+# 8, ss翻墙：
+#     安装shadowsocks，
+#     sudo apt install python-pip
+#     pip install shadowsocks
+#     sudo apt install nano
+#     nano /etc/shadowsocks.json
+# ss的配置文件如下，路径是 /etc/shadowsocks.json
+# {
+#     "server":"主机的Ip地址是",
+#     "server_port":8388,
+#     "local_address": "127.0.0.1",
+#     "local_port":1080,
+#     "password":"密码",
+#     "timeout":300,#超时
+#     "method":"aes-256-cfb",#加密方式
+#     "fast_open": false
+# }
+# 在后台运行：
+# ssserver -c /etc/shadowsocks.json -d start
+
+# 服务器开机自动启动，必要性不大，因为服务器基本不重启
+# echo '/usr/bin/ssserver -c /etc/shadowsocks.json -d'
+
+# 下载客户端，就可以在电脑和手机上翻墙了
+
+# Windows用户使用putty登录服务器，
+# ssh root@服务器地址
+# 注意：ssh默认端口是22
+# 如果服务器配置了其他端口为ssh端口
+# 需要下面命令
+# ssh root@服务器地址-p ssh端口
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,28 @@
+1, 占用3456端口
+docker run -t -d -p 3456:5000 --name test ubuntu:18.04
+2, 运行一个shiyong3456端口的容器, 会发现因为端口被占用而失败
+docker run -t -d -p 3456:5000 --name test1 ubuntu:18.04
+3, 删除test容器来关闭3456端口的占用
+docker rm -f test
+4, 再次运行容器发现仍然失败，因为名字已经存在
+  第二个命令虽然因为端口占用运行失败，但实际上容器已经生成
+  docker run -t -d p 3456:5000 --name test1 ubuntu:18.04
+5, 这时候要么改名字要么删除容器重来
+改名字:
+docker run -t -d -p 3456:5000 --name test2 ubuntu:18.04
+删容器:
+docker rm test1
+docker run -t -d -p 3456:5000 --name test1 ubuntu:18.04
+
+
+# 列出本机正在运行的容器
+$ docker container ls
+
+# 列出本机所有容器，包括终止运行的容器
+$ docker container ls --all
+
+# 我们需要确认容器有在运行，
+docker ps -n 10
+
+# 对容器状态为exited的重启
+docker start CONTAINER ID(docker ps 可以查到需要启动的容器的id)

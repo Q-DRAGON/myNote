@@ -1,0 +1,10 @@
+# cp参数把当前文件夹的a.py拷贝到demo容器的/code/a.py
+# 由于/code 必须是容器中存在的目录，Docker不会自动创建
+docker exec demo mkdir /code
+docker cp a.py "demo:/code/a.py"
+
+# 在容器demo中运行a.py
+docker exec demo python3 /code/a.py
+
+# 这4节的一系列操作就启动了一个名为demo的Docker容器
+# 并在容器中安装程序运行所需的依赖库然后运行了一个flask web 程序

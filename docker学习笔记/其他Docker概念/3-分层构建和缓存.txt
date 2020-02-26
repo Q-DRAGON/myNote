@@ -1,0 +1,17 @@
+镜像的分层构建和缓存
+
+docker 会对 dockerfile 中执行命令的结果生成缓存
+再次构建镜像的时候，如果没有改动就会复用缓存结果
+因为指令的顺序很重要，前面的指令有改变，后面会全部重新build
+所以应该吧最不易更改的指令放在最前面
+
+copy 指令中的源文件如果修改，也会被认为缓存失败
+
+可以使用 -f 参数指定构建镜像的文件名
+将下面3行保存为文件docker.txt
+FROM ubuntu:18.04
+COPY sources.list /etc/apt/sources.list
+RUN apt update
+
+构建命令如下
+docker build -t imagecache -f docker.txt .

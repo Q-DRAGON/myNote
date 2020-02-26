@@ -1,0 +1,15 @@
+介绍基于alpine linux 的 alpine镜像
+alpine 已经是官方推荐的打包基础镜像
+
+对比如下两个镜像的尺寸
+基于普通linux的python镜像
+基于alpine linux 的python镜像
+
+标签和默认标签（latest）
+python:3.7-alpine3.8
+python
+python:latest
+
+所以可以考虑如下两个用法
+1，使用专有镜像（比如python镜像）而不是ubuntu镜像上安装软件
+2，使用基于apline打包的镜像

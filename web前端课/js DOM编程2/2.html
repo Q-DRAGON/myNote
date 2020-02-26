@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>fe9-2 鼠标移入显示提示信息</title>
+        <style>
+            .gua-label {
+                display: inline-block;
+            }
+
+            .hide {
+                display: none;
+            }
+
+            #id-div-tip {
+                width: 100px;
+                color: #1198ff;
+                border: 1px solid red;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="gua-label">鼠标移入显示提示信息</div>
+        <div id="id-div-tip" class="hide">这是一个提示</div>
+        <p>hello gua</p>
+        <script>
+            const log = console.log.bind(console)
+
+            const e = function(selector) {
+                let element = document.querySelector(selector)
+                if (element === null) {
+                    let s = `selector ${selector} not found`
+                    alert(s)
+                    //
+                    return null
+                } else {
+                    return element
+                }
+            }
+
+            const bindEvent = function() {
+                let d = e('.gua-label')
+                let tip = e('#id-div-tip')
+                log('tip', tip)
+                // 'mouseover' 是鼠标移入元素发生的事件
+                d.addEventListener('mouseover', function(event) {
+                    log('鼠标移入')
+                    // 给元素删除 'hide' class
+                    // 这样就会删掉 .hide 的样式，这样就显示出来了
+                    tip.classList.remove('hide')
+                })
+
+                // 'mouseout' 是鼠标移出元素发生的事件
+                d.addEventListener('mouseout', function(event) {
+                    log('鼠标移出')
+                    // 添加元素的 'hide' class
+                    // 这样就会加上 .hide 的样式，这样就被隐藏了
+                    tip.classList.add('hide')
+                })
+            }
+
+            const __main = function() {
+                bindEvent()
+            }
+
+            __main()
+        </script>
+    </body>
+</html>

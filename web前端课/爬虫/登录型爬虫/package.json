@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "syncrequest": "^1.4.3"
+  },
+  "scripts": {
+    "start": "node zhihu.js"
+  }
+}
