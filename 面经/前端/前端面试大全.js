@@ -1,6 +1,9 @@
+/*
 HTML 部分
 localStorage 和 cookies
 // localStorage、 sessionStorage 与 cookies 的区别
+// Session是在服务端保存的一个数据结构，用来跟踪用户的状态，这个数据可以保存在集群、数据库、文件中；
+// Cookie是客户端保存用户信息的一种机制，用来记录用户的一些信息，也是实现Session的一种方式。
 
 // session 和 cookie 的区别？
 这个实际上属于后端的知识, 但是有些公司会问, 可以参考下面的链接
@@ -319,3 +322,4 @@ ant design: https://ant.design/index-cn
 前端性能优化
 旧版本的看 https://juejin.im/post/5b73ef38f265da281e048e51
 新版本的会加入 tree shaking 之类的东西，实际上上面的思想包含了
+*/
