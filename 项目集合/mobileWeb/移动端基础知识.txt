@@ -1,0 +1,57 @@
+css像素，物理像素
+devicePixelRatio:
+    1 - pc
+    2 -iphone4/4
+    3 -iphone7
+    放大与缩小会改变物理像素与css像素的比值。
+移动设备的视窗概念
+    layout viewport 布局视窗
+    visual viewport 物理视窗
+    ideal  viewport 理想视窗
+手机打开pc页面刚好被等比例缩放
+    浏览器特性
+设备宽高和viewport有什么关系
+
+如何使用meta设置viewport
+目的：使理想视窗等于物理视窗
+<meta name="viewport" content="width=device-width initial-scale=1.0,
+    maximum-scale=1.0, user-scalable=0:>
+
+media query(媒体查询):
+    @media 媒体类型 and (媒体特性) {
+        /*css*/
+    }
+媒体类型: screen, print
+媒体特性: max-width, max-height
+
+移动端适配篇
+rem, em
+vw, vh, vmin, vmax
+rem:
+   字体单位:
+    -值根据html根元素大小而定，同样可以作为宽度，高度等单位
+   适配原理
+    -px替换成rem, 动态修改html的fong-size适配
+   兼容性
+    -ios6 和Android2.1以上。
+
+移动端touch事件
+touchstart, touchmove, touchend, touchcancel
+300ms延迟: 判断是单击事件还是双击事件。比如苹果手机双击放大页面事件
+如何避免300ms延迟:
+    1, <meta name="viewport" content="width=device-width initial-scale=1.0,
+           maximum-scale=1.0, user-scalable=0:>
+           // 有些浏览器不支持
+    2, tap组件（FastClick, react-app）
+        // 基于touchstart, touchend.
+去除300ms延迟带来的点击穿透问题。
+      // 不要混用touch和click
+
+构建工具: grunt => 基于node.js实现的文件管理工具
+模块化工具: webpack => 使代码模块化
+// 项目里免得scss, less, vue文件编译生成webpack.config中output指定的文件。
+// 然后引入该指定文件。
+
+
+不同浏览器对es6存在支持问题。
+- 使用babel解决，不支持es6的浏览器，用babel转成es5

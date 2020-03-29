@@ -1,6 +1,6 @@
 compose的使用
 
-compose把一组容器作为一个项目来进行管理，并且会设置好容器间互联的内不网络
+compose把一组容器作为一个项目来进行管理，并且会设置好容器间互联的内部网络
 每一个容器在compose中被称之为服务（service)
 
 如同docker使用dockerfile来描述一个镜像的构建一样

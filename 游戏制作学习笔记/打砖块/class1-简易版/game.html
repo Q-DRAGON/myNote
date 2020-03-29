@@ -1,153 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>打砖块</title>
-    <style>
-        #id-canvas {
-            border: 1px solid black;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>打砖块</title>
+  <style>
+    #id-canvas {
+      border: 1px solid black;
+    }
+  </style>
 </head>
 <body>
 <canvas id="id-canvas" width="400" height="300"></canvas>
 </body>
 <script type="application/javascript">
-    const log = console.log.bind(console);
-    const e = (selector, element) => selector.querySelector(element);
+  // bug: 图片没有调用加载函数，再次重绘的时候，坐标出了问题.
+  const log = console.log.bind(console);
+  const e = (selector, element) => selector.querySelector(element);
+  const abs = (val) => {
+    return val >= 0 ? val : -val;
+  };
 
-    const imageFromPath = (path) => {
-        let img = new Image();
-        img.src = path;
-        return img;
+  const rectInterSects = (x01, x02, y01, y02, x11, x12, y11, y12) => {
+    zx = abs(x01 + x02 - x11 - x12);
+    x = abs(x01 - x02) + abs(x11 - x12);
+    zy = abs(y01 + y02 - y11 - y12);
+    y = abs(y01 - y02) + abs(y11 - y12);
+    if (zx <= x && zy <= y) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const imageFromPath = (path) => {
+    let img = new Image();
+    img.src = path;
+    return img;
+  };
+
+  let Paddle = function () {
+    let image = imageFromPath('../../material/打砖块/paddle.png');
+    let o = {
+      image,
+      x: 200,
+      y: 300 - 16,
+      speed: 10,
+    };
+    o.moveLeft = () => {
+      if (o.x <= 0) {
+        o.x = 0
+      } else {
+        o.x -= o.speed;
+      }
+    };
+    o.moveRight = () => {
+      if (o.x + o.image.width >= 400) {
+        o.x = 400 - o.image.width;
+      } else {
+        o.x += o.speed;
+      }
+    };
+    o.collide = (obj) => {
+      return rectInterSects(o.x, o.x + o.image.width, o.y, o.y + o.image.height,
+        obj.x, obj.x + obj.image.width, obj.y, obj.y + obj.image.height);
+    };
+    return o;
+  };
+
+  let Ball = function () {
+    let image = imageFromPath('../../material/打砖块/ball.png');
+    let o = {};
+    o = {
+      image,
+      x: 100,
+      y: 160,
+      speedX: 6,
+      speedY: 6,
+      fired: false,
+    };
+    o.move = () => {
+      if (o.fired) {
+        if (o.x < 0 || o.x + o.image.width > 400) {
+          o.speedX *= -1;
+        }
+        if (o.y < 0 || o.y + o.image.height > 300) {
+          o.speedY *= -1;
+        }
+        o.x += o.speedX;
+        o.y += o.speedY;
+      }
+    };
+    o.fire = () => {
+      o.fired = true;
+    };
+    o.pause = () => {
+      o.fired = false;
+    };
+    o.hasPoint = (x, y) => {
+      var self = o;
+      var xIn = x >= self.x && x <= self.x + self.image.width;
+      var yIn = y >= self.y && y <= self.y + self.image.height;
+      return xIn && yIn
+    };
+    o.rebound = () => {
+      o.speedY *= -1;
+    };
+    return o;
+  };
+
+  let Block = function () {
+    var image = imageFromPath('../../material/打砖块/block.png');
+    var o = {
+      image,
+      x: 100,
+      y: 100,
+      w: 32,
+      h: 16,
+      alive: true,
+    };
+    o.kill = function () {
+      o.alive = false;
+    };
+    o.collide = (obj) => {
+      return o.alive && rectInterSects(o.x, o.x + o.image.width, o.y, o.y + o.image.height,
+        obj.x, obj.x + obj.image.width, obj.y, obj.y + obj.image.height);
+    };
+    return o;
+  };
+
+  let Game = function () {
+    let canvas = e(document, '#id-canvas');
+    let ctx = canvas.getContext('2d');
+    let g = {
+      canvas,
+      ctx,
+      actions: {},
+      keydowns: {},
+    };
+    g.drawImage = (obj) => {
+      // log(`draw${decodeURI(obj.image.src)}`, obj.y);
+      g.ctx.drawImage(obj.image, obj.x, obj.y);
+    };
+    // events
+    window.addEventListener('keydown', (event) => {
+      g.keydowns[event.key] = true;
+    });
+    window.addEventListener('keyup', (event) => {
+      g.keydowns[event.key] = false;
+    });
+    // register
+    g.registerAction = (key, callback) => {
+      g.actions[key] = callback;
+    };
+    // timer
+    setInterval(() => {
+      // events
+      let ks = Object.keys(g.actions);
+      ks.forEach((k) => {
+        if (g.keydowns[k]) {
+          g.actions[k]();
+        }
+      });
+      // update
+      g.update();
+      // clear
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // draw
+      g.draw();
+    }, 1000 / 30);
+    return g;
+  };
+
+  const main = () => {
+    let game = Game();
+    let paddle = Paddle();
+    let ball = Ball();
+    let blocks = [];
+    for (let i = 0; i < 4; i++) {
+      let b = Block();
+      b.x = i * 100;
+      b.y = 50;
+      blocks.push(b);
+    }
+    let enableDrag = false;
+
+    game.registerAction('a', () => {
+      paddle.moveLeft();
+    });
+
+    game.registerAction('d', () => {
+      paddle.moveRight();
+    });
+
+    game.registerAction('f', () => {
+      ball.fire();
+    });
+
+    game.registerAction('p', () => {
+      ball.pause();
+    });
+
+    game.canvas.addEventListener('mousedown', function (event) {
+      var x = event.offsetX;
+      var y = event.offsetY;
+      if (ball.hasPoint(x, y)) {
+        enableDrag = true
+      }
+    });
+    game.canvas.addEventListener('mousemove', function (event) {
+      var x = event.offsetX;
+      var y = event.offsetY;
+      if (enableDrag) {
+        ball.x = x;
+        ball.y = y;
+      }
+    });
+    game.canvas.addEventListener('mouseup', function (event) {
+      var x = event.offsetX;
+      var y = event.offsetY;
+      enableDrag = false
+    });
+
+    game.update = () => {
+      // collide
+      if (paddle.collide(ball)) {
+        // 反弹
+        ball.rebound();
+      }
+      ball.move();
+      for (let i = 0; i < blocks.length; i++) {
+        let block = blocks[i];
+        if (block.collide(ball)) {
+          block.kill();
+          // 反弹
+          ball.rebound();
+        }
+      }
     };
 
-    let Paddle = function () {
-        let image = imageFromPath('../../material/打砖块/paddle.png');
-        let o = {
-            image,
-            x: 100,
-            y: 200,
-            speed: 5,
-        };
-        o.moveLeft = () => {
-            o.x -= o.speed;
-        };
-        o.moveRight = () => {
-            o.x += o.speed;
-        };
-        o.collide = (obj) => {
-            if (obj.x + obj.image.width >= o.x && obj.x < o.x + o.image.width) {
-                if (obj.y <= o.y + o.image.height && obj.y + obj.image.height > o.y) {
-                    return true;
-                }
-            }
-            return false;
-        };
-        return o;
+    game.draw = () => {
+      game.drawImage(paddle);
+      game.drawImage(ball);
+      for (let i = 0; i < blocks.length; i++) {
+        let block = blocks[i];
+        if (block.alive) {
+          game.drawImage(block);
+        }
+      }
     };
+  };
 
-    let Ball = function () {
-        let image = imageFromPath('../../material/打砖块/ball.png');
-        let o = {
-            image,
-            x: 100,
-            y: 200 - image.height,
-            speedX: 6,
-            speedY: 6,
-            fired: false,
-        };
-        o.move = () => {
-            if (o.fired) {
-                if (o.x < 0 || o.x + o.image.width > 400) {
-                    o.speedX *= -1;
-                }
-                if (o.y < 0 || o.y + o.image.height > 300) {
-                    o.speedY *= -1;
-                }
-                o.x += o.speedX;
-                o.y += o.speedY;
-            }
-        };
-        o.fire = () => {
-            o.fired = true;
-        };
-        return o;
-    };
-
-    let Game = function () {
-        let canvas = e(document, '#id-canvas');
-        let ctx = canvas.getContext('2d');
-        let g = {
-            canvas,
-            ctx,
-            actions: {},
-            keydowns: {},
-        };
-        g.drawImage = (obj) => {
-          g.ctx.drawImage(obj.image, obj.x, obj. y);
-        };
-        // events
-        window.addEventListener('keydown', (event) => {
-            g.keydowns[event.key] = true;
-        });
-        window.addEventListener('keyup', (event) => {
-            g.keydowns[event.key] = false;
-        });
-        // register
-        g.registerAction = (key, callback) => {
-            g.actions[key] = callback;
-        };
-        // timer
-        setInterval(() => {
-            // events
-            let ks = Object.keys(g.actions);
-            ks.forEach((k) => {
-                if (g.keydowns[k]) {
-                    g.actions[k]();
-                }
-            });
-            // update
-            g.update();
-            // clear
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            // draw
-            g.draw();
-        }, 1000 / 30);
-        return g;
-    };
-
-    const main = () => {
-        let game = Game();
-        let paddle = Paddle();
-        let ball = Ball();
-
-        game.registerAction('a', () => {
-            paddle.moveLeft();
-        });
-
-        game.registerAction('d', () => {
-            paddle.moveRight();
-        });
-
-        game.registerAction('f', () => {
-            ball.fire();
-        });
-
-        game.update = () => {
-            ball.move();
-            // collide
-            if (paddle.collide(ball)) {
-                ball.speedY *= -1;
-            }
-        };
-
-        game.draw = () => {
-            game.drawImage(paddle);
-            game.drawImage(ball);
-        };
-    };
-
-    main();
+  main();
 </script>
 </html>

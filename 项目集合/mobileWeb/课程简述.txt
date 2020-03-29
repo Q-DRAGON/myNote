@@ -1,0 +1,47 @@
+移动端基础知识：
+-物理像素,逻辑像素 flex
+-mediaQuery, viewport
+-rem适配, touch
+-代码管理工具
+-项目构建与webpack
+-sass预处理
+-react组件化思想
+【300ms点击延迟，多tab页面懒加载，1px边框，css伪类妙用
+    滚动web加载数据，移动web输入框】
+
+工程的要求：
+外卖首页（首页，订单，我的）
+店铺详情（点菜，评价，商家）
+分类页
+评价页
+
+从零搭建构建环境
+-webpack
+-babel
+-esline
+-webpack hmr
+-webpack-dev-sercer
+
+redux基础知识
+-redux
+-react-redux
+-redux-thunk
+-redux-logger
+-redux-devtool
+
+react+页面逻辑
+react-dom
+es6
+react-router
+axios
+rem适配
+sass
+vscode
+
+hybrid开发
+-通信机制
+-jsbridge开发
+-ios webview
+-真实数据
+-性能调优
+
