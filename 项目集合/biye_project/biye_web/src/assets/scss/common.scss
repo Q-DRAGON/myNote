@@ -1,0 +1,39 @@
+@import './slidebar.scss';
+
+body {
+  margin: 0;
+}
+
+._specialtableHeader {
+  height: 30px;
+  background-image: linear-gradient(0deg,
+          #f6f7f9 0%,
+          #ffffff 100%);
+  /*border: solid 1px #d7dce3;*/
+}
+._specialtableHeaderCell {
+  background-image: linear-gradient(0deg,
+          #f6f7f9 0%,
+          #ffffff 100%);
+  border: solid 1px #d7dce3 !important;
+  height: 30px !important;
+  padding: 0 !important;
+}
+._specialtableHeaderCell + ._specialtableHeaderCell {
+  border-left: none;
+}
+._specialtableRow, ._specialtableCell{
+  height: 40px !important;
+  border: solid 1px #d7dce3 !important;
+}
+._specialtableCell {
+  padding: 0 !important;
+}
+
+.current-row td {
+  background-color: #fffcee !important;
+}
+
+._specialCaret .caret-wrapper {
+  opacity: 1 !important;
+}

@@ -1,0 +1,126 @@
+事件委托:
+将子元素的事件处理程序写到父元素的事件处理程序
+
+什么是jsonp?
+script是跨域的，服务器收到请求，将数据放在一个指定的名字的回调函数里传回来
+<script>
+const foo = (data) => {
+  log(data.id)
+}
+</script>
+<script src="http://example.com/ip?callback=foo"></script>
+
+跨域通信：jsonp, websocket, cors
+
+关于fetch
+当接收到一个代表错误的 HTTP 状态码时，从 fetch()返回的 Promise 不会被标记为 reject，
+即使该 HTTP 响应的状态码是 404 或 500。相反，它会将 Promise 状态标记为
+resolve （但是会将 resolve 的返回值的 ok 属性设置为 false ），
+仅当网络故障时或请求被阻止时，才会标记为 reject。
+
+默认情况下，fetch 不会从服务端发送或接收任何 cookies,
+如果站点依赖于用户 session，则会导致未经认证的请求（要发送 cookies，必须设置 credentials 选项）。
+自从2017年8月25日后，默认的credentials政策变更为same-originFirefox也在61.0b13中改变默认值
+
+fetch获取数据
+fetch('https://api.github.com/users/chriscoyier/repos')
+  .then(response => response.json())
+  .then(data => {
+    // data就是我们请求的repos
+    console.log(data)
+  });
+
+  fetch发送数据
+  let content = {some: 'content'};
+
+// The actual fetch request
+fetch('some-url', {
+  method: 'post',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(content)
+})
+// .then()...
+
+
+6. 描述一个完整的Redux的数据流
+// http://www.alloyteam.com/2015/09/react-redux/
+Redux 主要分为三个部分 Action、Reducer、及 Store
+action: 传递操作state的信息，一般使用函数的方式，生成一个state描述。{'done' : true, 'todo': todo}
+Reducer: 一般为简单的处理函数，通过传入旧的 state 和指示操作的 action 来更新 state(根据action更新state)
+Store: 在 Redux 项目中，Store 是单一的。维护着一个全局的 State，并且根据 Action 来进行事件分发处理 State。可以看出 Store 是一个把 Action 和 Reducer 结合起来的对象。
+
+Action => state更新（handleChange, setState, render） => 组件更新
+
+Vuex:
+State（render） => vue component(dispatch) => actions (commit) => mutation (mutate) => state => ....
+核心概念：
+1， state, 初始化一个Vuex.Store保存所有的组建的公共数据。
+2， getters, 所有组建的computed属性。也就是store的计算属性。getters 的返回值会根据它的依赖被缓存起来，且只有当它的依赖值发生了改变才会被重新计算。
+3， Mutations， store中的methods，有两个参数 第一个参数是state, 第二参数是payload自定义参数
+4， Actions， 类似于mutations,可以异步操作，mutations不可以
+5， Modules Vuex 允许我们将 store 分割成模块（module）。每个模块拥有自己的 state、mutation、action、getter、甚至是嵌套子模块——从上至下进行同样方式的分割
+
+7, 关于长轮训和短轮询：
+短轮询：
+短轮询指的是在循环周期内，不断发起请求，
+每一次请求都立即返回结果，根据新旧数据对比决定是否使用这个结果。
+长轮询：
+而长轮询及是在请求的过程中，若是服务器端数据并没有更新，那么则将这个连接挂起，
+直到服务器推送新的数据，再返回，然后再进入循环周期。
+
+
+关于webpack原理：
+var path = require('path');
+var node_modules = path.resolve(__dirname, 'node_modules');
+var pathToReact = path.resolve(node_modules, 'react/dist/react.min.js');
+
+module.exports = {
+  // 入口文件，是模块构建的起点，同时每一个入口文件对应最后生成的一个 chunk。
+  entry: {
+    bundle: [
+      'webpack/hot/dev-server',
+      'webpack-dev-server/client?http://localhost:8080',
+      path.resolve(__dirname, 'app/app.js')
+    ]
+  },
+  // 文件路径指向(可加快打包过程)。
+  resolve: {
+    alias: {
+      'react': pathToReact
+    }
+  },
+  // 生成文件，是模块构建的终点，包括输出文件与输出路径。
+  output: {
+    path: path.resolve(__dirname, 'build'),
+    filename: '[name].js'
+  },
+  // 这里配置了处理各模块的 loader ，包括 css 预处理 loader ，es6 编译 loader，图片处理 loader。
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        loader: 'babel',
+        query: {
+          presets: ['es2015', 'react']
+        }
+      }
+    ],
+    noParse: [pathToReact]
+  },
+  // webpack 各插件对象，在 webpack 的事件流中执行对应的方法。
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ]
+};
+
+loader：能转换各类资源，并处理成对应模块的加载器。loader 间可以串行使用。
+chunk：code splitting 后的产物，也就是按需加载的分块，装载了不同的 module。
+webpack 本质上是把一段代码解析成 ast(抽象语法树)，
+然后再根据 ast 生成 iife(立即调用匿名函数)，这样就可以在浏览器上运行了。
+
+关于rem和em和px
+px 在缩放页面时无法调整那些使用它作为单位的字体、按钮等的大小；
+em 的值并不是固定的，会继承父级元素的字体大小，代表倍数；
+rem 的值并不是固定的，始终是基于根元素 <html> 的，也代表倍数。

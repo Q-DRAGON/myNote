@@ -1,4 +1,4 @@
-本文件夹下有3个文件(app.py 和 dockerfile )
+s本文件夹下有3个文件(app.py 和 dockerfile )
 直接运行下面的命令构建镜像
 
 # 命令中参数 -t webimage 指定了镜像的名字为 webimage

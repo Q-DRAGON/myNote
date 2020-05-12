@@ -1,0 +1,13 @@
+pipeline:
+  run:
+    image: nginx
+  deploy:
+    image: appleboy/drone-ssh
+    host: 49.234.21.254
+    username: root
+    secrets: [ ssh_key ]
+    port: 22
+    script:
+      - cd /home/woyao/biye_web
+      - git pull
+      - sudo sh reload.sh

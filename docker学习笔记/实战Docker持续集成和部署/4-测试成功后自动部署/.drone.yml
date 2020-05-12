@@ -13,3 +13,4 @@ pipeline:
       - cd /home/ubuntu/test
       - git pull
       - sudo sh reload.sh
+

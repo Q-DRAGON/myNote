@@ -1,0 +1,61 @@
+#客户端渲染
+    * 浏览器显示的页面是js在浏览器运行以后显示出来的页面
+    * 默认改页面打开网页源代码与浏览器显示的页面内容不一样
+
+#服务器渲染
+    * 虚拟Dom是真实Dom的一个js对象映射
+    * 首屏加载速度加快，有利于seo，消耗的是服务器端的性能
+    * pacakage.json的运行脚本运行的文件是webpack打包生成的js文件
+    * webpack.server.js打包的express运行文件中引入的react组件写法
+    ```
+        import React from 'react'
+        import { renderToString } from 'react-dom/server'
+        import Home from './component/Home'
+
+        app.get('/', function(req, res) {
+            res.send(renderToString(<Home/>))
+        })
+    ```
+    ```
+        // webpack打包更新与运行脚本更新
+        "script": {
+            // 并行执行dev:命令
+            "dev": "num-run-all --parallel dev:**"
+            // 监听build文件夹下是否有文件更新，执行exec 后面的脚本
+            "dev:start": "nodemon --watch build --exec node \"./build/build.js \""
+            "dev:build": "webpack --config webpack.server.js --watch"
+        }
+
+    ```
+    * 同构（因为react renderToString不会把组件的事件之类的代码执行:
+    * 一套react代码，在服务器执行一次，在客户端也执行一次
+    ```
+        app.use(express.static('public'))
+        const content = renderToString(<Home/>)
+        app.get('/', (req, res) => {
+            res.send(`
+                <html>
+                    <head></head>
+                    <body>
+                        <div id="root">
+                            ${ content }
+                        </div>
+                        // 客户端也执行一次
+                        <script src="/index.js"></script>
+                    </body>
+                </html>
+            `)
+        })
+    ```
+    ```
+        // 创建client文件夹以及webpack.client.js
+        entry: './src/clent/index.js'
+        output: {
+            filename： 'index.js',
+            path: path.resolve(__dirname, 'public')
+        }
+        // 在client文件夹中重新引入虚拟dom的渲染
+        import Home from '../src/containers/Home'
+        reactDom.hydrate(<Home/>, docuemnt.getElemntById('root'))
+    ```
+

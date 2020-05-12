@@ -11,6 +11,8 @@ compose使用一个docker-compose.yml文件来描述compose项目的构建
 下面使用一个简单的例子来讲述如何使用compose管理多容器应用
 项目运行起来后，用ctrl+c终止项目
 docker-compose up
+重新运行
+docker-compose up --build
 
 用-d参数让项目后台运行
 docker-compose up -d

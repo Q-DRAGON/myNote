@@ -1,0 +1,1 @@
+<view><text>{{text}}</text><navigator url="../next2Page/next2Page" hover-class="c-click">to next2Page</navigator></view>

@@ -1,0 +1,32 @@
+// (1) 借助构造函数实现继承
+ function Parent() {
+   this.name = 'parent'
+ }
+ function Child() {
+   Parent.call(this)
+   this.age = 18
+ }
+ // 这种方式只能实现部分继承，即父类的构造方法中的属性，子类可以继承，其缺点是，父类原型上的属性或方法，子类无法继承。
+ // (2)借助原型链实现继承
+ function Parent() {
+   this.name = 'parent'
+   this.play = [1, 2, 3]
+ }
+ function Child() {
+   this.age = 18
+ }
+ Child.prototype = new Parent()
+ // 这种继承方式的缺点是用子类Child实例化两个对象后，var s1 = new Child(); var s2 = new Child(); s1.play.push(4); console.log(s2.play); 也会打印出[1,2,3,4]，其原因是两个对象的__proto__指向了同一个原型对象。
+ // (3)组合方式(继承的完美实现)
+ function Parent() {
+   this.name = 'parent'
+ }
+ function Child() {
+   //	将父对象的构造函数绑定在子对象上
+   Parent.call(this)
+   this.age = 18
+ }
+ //  将Parent的prototype拷贝给Child
+ Child.prototype = Object.create(Parent.prototype)
+ //  修正Child的prototype对象指向的构造函数
+ Child.prototype.constructor = Child

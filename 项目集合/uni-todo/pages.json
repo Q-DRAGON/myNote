@@ -1,0 +1,62 @@
+{
+	"pages": [
+		// 第一项是启动页面
+		{
+			"path": "pages/testPage/testPage",
+			"style": {
+				"navigationBarTitleText": "todo",
+				"h5": {
+					"titleNView": {
+						"backgroundColor": "#007AFF",
+						"titleColor": "#FFFFFF"
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "uni-app"
+			}
+		},
+		{
+			"path": "pages/nextPage/nextPage"
+		},
+		{
+			"path": "pages/next2Page/next2Page"
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"h5": {
+			
+		},
+		"mp-weixin": {
+			
+		}
+	},
+	// tabBar 使用一次之后就会保存到内存之中
+	"tabBar": {
+		"color": "#333333",
+		"selectedColor": "#007AFF",
+		"backgroundColor": "#F5F5F5",
+		// list一般最少2个最多5个
+		"list": [
+			{
+				"pagePath": "pages/testPage/testPage",
+				"iconPath": "static/homeIcon.png",
+				"selectedIconPath": "static/homeIconActive.png",
+				"text": "home"
+			},
+			{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/myIcon.png",
+				"selectedIconPath": "static/myIconActive.png",
+				"text": "next"
+			}
+		]
+	}
+}

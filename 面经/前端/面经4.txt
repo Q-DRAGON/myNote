@@ -1,0 +1,150 @@
+回流和重绘：
+renderTree:
+简单的理解就是DOM Tree和我们写的CSS结合在一起之后，渲染出了render tree
+回流（reflow）:
+当render tree中的一部分(或全部)因为元素的规模尺寸，布局，隐藏等改变而需要重新构建。
+重绘（repain）:
+当render tree中的一些元素需要更新属性，而这些属性只是影响元素的外观，风格，
+而不会影响布局的，比如background-color。则就叫称为重绘。
+关系：
+回流必将引起重绘，而重绘不一定会引起回流。
+减少回流和重绘的优化：
+1. 不要一条一条地修改 DOM 的样式。预先定义好 css 的 class，然后修改 DOM 的 className
+// 不好的写法
+   var left = 10,
+   top = 10;
+   el.style.left = left + "px";
+   el.style.top  = top  + "px";
+   el.style.background = '#eee';
+   // 比较好的写法
+   el.className += " theclassname";
+2. 让要操作的元素进行”离线处理”，处理完后一起更新
+- 使用DocumentFragment进行缓存操作,引发一次回流和重绘；
+- 使用display:none，只引发两次回流和重绘;
+3. 避免使用CSS的JavaScript表达式
+
+
+关于所谓的babel(去他喵的沙雕面试官):
+目的：Babel是一个广泛使用的转码器，可以将ES6代码转为ES5代码，从而在现有环境执行。
+链接：http://www.ruanyifeng.com/blog/2016/01/babel.html
+配置文件：.babelrc, 建立vue-cli或者 react-app的时候都会生成.babelrc配置文件
+命令行转码: babel-cli
+{
+安装： npm install --global babel-cli
+基本用法:
+# 转码结果输出到标准输出
+$ babel example.js
+# 转码结果写入一个文件
+# --out-file 或 -o 参数指定输出文件
+$ babel example.js --out-file compiled.js
+# 或者
+$ babel example.js -o compiled.js
+# 整个目录转码
+# --out-dir 或 -d 参数指定输出目录
+$ babel src --out-dir lib
+# 或者
+$ babel src -d lib
+# -s 参数生成source map文件
+$ babel src -d lib -s
+}
+原理（我猜的）：将代码块进行词法，语法分析转成ast树(es5的写法)，然后eval执行这种es5代码即可。
+
+
+函数防抖和函数节流：（一段时间内多次执行只有一次有效， 技能有cd时隔多长时间才能运行）
+链接: https://juejin.im/post/5a35ed25f265da431d3cc1b1
+函数防抖（debounce）:
+概念: 在事件被触发n秒后再执行回调，如果在这n秒内又被触发，则重新计时。
+生活中的实例： 如果有人进电梯（触发事件），那电梯将在10秒钟后出发（执行事件监听器）
+这时如果又有人进电梯了（在10秒内再次触发该事件），我们又得等10秒再出发（重新计时）。
+应用场景:
+给按钮加函数防抖防止表单多次提交。
+对于输入框连续输入进行AJAX验证时，用函数防抖能有效减少请求次数。
+判断scroll是否滑到底部，滚动事件+函数防抖
+源码(垃圾代码不用管):
+function debounce(fn, wait) {
+  var timer = null;
+  return function () {
+      var context = this
+      var args = arguments
+      if (timer) {
+          clearTimeout(timer);
+          timer = null;
+      }
+      timer = setTimeout(function () {
+          fn.apply(context, args)
+      }, wait)
+  }
+}
+
+var fn = function () {
+  console.log('boom')
+}
+
+setInterval(debounce(fn, 500),1000) // 第一次在1500ms后触发，之后每1000ms触发一次
+
+setInterval(debounce(fn, 2000),1000) // 不会触发一次（我把函数防抖看出技能读条，如果读条没完成就用技能，便会失败而且重新读条）
+
+函数节流（throttle）:
+概念： 规定一个单位时间，在这个单位时间内，只能有一次触发事件的回调函数执行，
+如果在同一个单位时间内某事件被触发多次，只有一次能生效。
+生活中的实例： 我们知道目前的一种说法是当 1 秒内连续播放 24 张以上的图片时，
+在人眼的视觉中就会形成一个连贯的动画，所以在电影的播放（以前是，现在不知道）中基本是以每秒 24 张的速度播放的，
+为什么不 100 张或更多是因为 24 张就可以满足人类视觉需求的时候，100 张就会显得很浪费资源。
+源码：
+function throttle(fn, gapTime) {
+  let _lastTime = null;
+
+  return function () {
+    let _nowTime = + new Date()
+    if (_nowTime - _lastTime > gapTime || !_lastTime) {
+      fn();
+      _lastTime = _nowTime
+    }
+  }
+}
+
+let fn = ()=>{
+  console.log('boom')
+}
+
+setInterval(throttle(fn,1000),10)
+
+
+关于js中的 Iterator、Generator、Set、Maps、Proxy、Reflect、Symbol、Promise（感觉暂时用不到就没看了）
+链接： http://taobaofed.org/blog/2016/11/03/es6-advanced/
+
+
+Javascript垃圾回收方法
+标记清除（mark and sweep）
+这是JavaScript最常见的垃圾回收方式，当变量进入执行环境的时候，比如函数中声明一个变量，垃圾回收器将其标记为“进入环境”，当变量离开环境的时候（函数执行结束）将其标记为“离开环境”。
+
+垃圾回收器会在运行的时候给存储在内存中的所有变量加上标记，然后去掉环境中的变量以及被环境中变量所引用的变量（闭包），在这些完成之后仍存在标记的就是要删除的变量了
+
+引用计数(reference counting)
+在低版本IE中经常会出现内存泄露，很多时候就是因为其采用引用计数方式进行垃圾回收。引用计数的策略是跟踪记录每个值被使用的次数，当声明了一个
+变量并将一个引用类型赋值给该变量的时候这个值的引用次数就加1，如果该变量的值变成了另外一个，
+则这个值得引用次数减1，当这个值的引用次数变为0的时 候，说明没有变量在使用，这个值没法被访问了，
+因此可以将其占用的空间回收，这样垃圾回收器会在运行的时候清理掉引用次数为0的值占用的空间。
+
+在IE中虽然JavaScript对象通过标记清除的方式进行垃圾回收，但BOM与DOM对象却是通过引用计数回收垃圾的， 也就是说只要涉及BOM及DOM就会出现循环引用问题。
+
+谈谈性能优化问题：
+代码层面：避免使用css表达式，避免使用高级选择器，通配选择器。
+缓存利用：缓存Ajax，使用CDN，使用外部js和css文件以便缓存，添加Expires头，服务端配置Etag，减少DNS查找等
+请求数量：合并样式和脚本，使用css图片精灵，初始首屏之外的图片资源按需加载，静态资源延迟加载。
+请求带宽：压缩文件，开启GZIP，
+
+什么是Etag？
+当发送一个服务器请求时，浏览器首先会进行缓存过期判断。浏览器根据缓存过期时间判断缓存文件是否过期。
+
+情景一：若没有过期，则不向服务器发送请求，直接使用缓存中的结果，此时我们在浏览器控制台中可以看到 200 OK(from cache) ，此时的情况就是完全使用缓存，浏览器和服务器没有任何交互的。
+
+情景二：若已过期，则向服务器发送请求，此时请求中会带上①中设置的文件修改时间，和Etag
+
+然后，进行资源更新判断。服务器根据浏览器传过来的文件修改时间，判断自浏览器上一次请求之后，文件是不是没有被修改过；根据Etag，判断文件内容自上一次请求之后，有没有发生变化
+
+情形一：若两种判断的结论都是文件没有被修改过，则服务器就不给浏览器发index.html的内容了，
+直接告诉它，文件没有被修改过，你用你那边的缓存吧—— 304 Not Modified，此时浏览器就会从本地缓存中获取index.html的内容。此时的情况叫协议缓存，浏览器和服务器之间有一次请求交互。
+
+情形二：若修改时间和文件内容判断有任意一个没有通过，则服务器会受理此次请求，之后的操作同①
+① 只有get请求会被缓存，post请求不会

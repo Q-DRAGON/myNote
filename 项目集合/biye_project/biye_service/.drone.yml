@@ -1,0 +1,15 @@
+pipeline:
+  run:
+    image: python:3.7-alpine3.8
+    commands:
+      - python3 test.py
+  deploy:
+    image: appleboy/drone-ssh
+    host: 49.234.21.254
+    username: root
+    secrets: [ ssh_key ]
+    port: 22
+    script:
+      - cd /home/woyao/biye_service
+      - git pull
+      - sudo sh deploy.sh

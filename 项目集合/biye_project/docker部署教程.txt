@@ -1,0 +1,8 @@
+https://juejin.im/post/5cce4b1cf265da0373719819
+biye_web:
+  1, npm run build
+  2, 配置ngnix
+  3, dockerfile配置
+  4, .drone.yml 自动化部署配置
+  5, sh run.sh 提交代码
+biye_service:
